@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE instance-profile
+        SYSTEM "https://resources.jetbrains.com/writerside/1.0/product-profile.dtd">
+
+<instance-profile id="ied"
+                 name="Iwakura Enterprises Documentations"
+                 start-page="Home.md">
+
+    <toc-element topic="starter-topic.md"/>
+    <toc-element topic="Home.md">
+        <toc-element topic="Maven-Versions.md"/>
+    </toc-element>
+    <toc-element toc-title="Libraries">
+        <toc-element topic="Sigewine.md"/>
+        <toc-element topic="Console-Parallax.md"/>
+        <toc-element topic="Pumpk1n.md"/>
+        <toc-element toc-title="Mayu's JSON Utilities"/>
+        <toc-element toc-title="Mayu's JDA Utilities"/>
+        <toc-element toc-title="Time Stop Protocol"/>
+        <toc-element topic="Nrdy-Loader.md"/>
+        <toc-element toc-title="Simple Java API Wrapper">
+            <toc-element topic="Documentation.md"/>
+            <toc-element toc-title="Implementations">
+                <toc-element topic="TopGG-Java-SDK.md"/>
+                <toc-element topic="Java-Cobalt-API.md"/>
+                <toc-element topic="Java-Discord-OAuth2-API.md"/>
+            </toc-element>
+        </toc-element>
+    </toc-element>
+    <toc-element toc-title="Frameworks">
+        <toc-element toc-title="Modular Discord Bot"/>
+    </toc-element>
+    <toc-element toc-title="Minecraft Mods">
+        <toc-element topic="Colored-End-Crystals.md"/>
+    </toc-element>
+</instance-profile>
