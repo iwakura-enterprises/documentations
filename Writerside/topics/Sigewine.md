@@ -4,7 +4,7 @@
 
 ## Project structure
 
-Since of version 2.0.0, project is split into multiple modules:
+As of version 2.0.0, the project is split into multiple modules:
 
 | Name   | Description                                                                                                                   | Version                                                                |
 |--------|-------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------|
@@ -73,7 +73,7 @@ Sigewine allows you to easily inject beans into your classes using annotations. 
 a class instance as a "bean" and then inject it into other classes that require it. This automates the process of
 managing class instances and passing them around, making your code cleaner and more maintainable.
 
-In the end, it does it: a) creates instances of your classes, b) injects them into other classes that require them using
+In the end, Sigewine: a) creates instances of your classes, b) injects them into other classes that require them using
 constructors.
 
 ## Features
@@ -82,6 +82,7 @@ constructors.
 - Automatic bean scanning
 - Custom bean names
 - Typed array list for bean injection
+- Extensions (Constellations) for additional functionality
 
 <warning title="Limitations">
 <ul>
