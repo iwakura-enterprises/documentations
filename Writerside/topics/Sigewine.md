@@ -1,125 +1,87 @@
 # Sigewine
 
-Sigewine is a Java library for simple and lightweight dependency injection.
+> Sigewine is a Java library for simple and lightweight dependency injection.
 
-> Disclaimer: The library name is not related to any character in any game or media.
+## Project structure
 
-<warning>
-There is no reason for you to use this library for such functionality;
-use <a href="https://github.com/google/dagger">Dagger 2</a> for example, which provides
-more features and support. <b>This is just a little fun project of mine.</b>
+Since of version 2.0.0, project is split into multiple modules:
+
+| Name   | Description                                                                                                                   | Version                                                                |
+|--------|-------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------|
+| `core` | The core library that provides the dependency injection functionality.                                                        | <include from="Maven-Versions.md" element-id="sigewine_core_version"/> |
+| `aop`  | Contains AOP-like Proxy functionality to allow wrap beans. For example, to log method calls or to add transaction management. | <include from="Maven-Versions.md" element-id="sigewine_aop_version"/>  |
+
+Each module has its own maven artifact. The versions between them are aligned, so you can use the same version for all
+modules.
+
+> More modules may be added in the future, such as `sigewine-irminsul` and `sigewine-sentry`.
+> {style="note"}
+
+<warning title="AOP module size">
+    AOP module is quite large, as it contains ByteBuddy dependency. It is recommended to use it only if you need
+    AOP-like method interception functionality.
 </warning>
 
 ## Installation
-- Java >= 21 is required.
-- Required dependency: [org.reflections](https://mvnrepository.com/artifact/org.reflections/reflections/0.10.2)
 
-<include from="Maven-Versions.md" element-id="sigewine_version"/>
+<tabs>
+    <tab id="gradle" title="Gradle">
+        <code-block lang="groovy">
+            implementation 'enterprises.iwakura:sigewine-core:VERSION'
+            implementation 'enterprises.iwakura:sigewine-aop:VERSION'
+            // Required for core module
+            implementation 'org.reflections:reflections:0.10.2'
+            // Required for AOP module
+            implementation 'net.bytebuddy:byte-buddy:1.17.5'
+        </code-block>
+    </tab>
+    <tab id="maven" title="Maven">
+        <code-block lang="xml">
+            <![CDATA[
+                <dependency>
+                    <groupId>enterprises.iwakura</groupId>
+                    <artifactId>sigewine-core</artifactId>
+                    <version>VERSION</version>
+                </dependency>
+                <dependency>
+                    <groupId>enterprises.iwakura</groupId>
+                    <artifactId>sigewine-aop</artifactId>
+                    <version>VERSION</version>
+                </dependency>
+                <!-- Required for core module -->
+                <dependency>
+                    <groupId>org.reflections</groupId>
+                    <artifactId>reflections</artifactId>
+                    <version>0.10.2</version>
+                </dependency>
+                <!-- Required for AOP module -->
+                <dependency>
+                    <groupId>net.bytebuddy</groupId>
+                    <artifactId>byte-buddy</artifactId>
+                    <version>1.17.5</version>
+                </dependency>
+            ]]>
+        </code-block>
+    </tab>
+</tabs>
 
-### Maven
-```xml
-<dependency>
-    <groupId>enterprises.iwakura</groupId>
-    <artifactId>sigewine</artifactId>
-    <version>VERSION</version>
-</dependency>
-```
+**The minimum required Java version is 21**.
 
-### Gradle
-```groovy
-implementation 'enterprises.iwakura:sigewine:VERSION'
-```
+## Dependency injection
+
+Sigewine allows you to easily inject beans into your classes using annotations. In simple terms, you can define
+a class instance as a "bean" and then inject it into other classes that require it. This automates the process of
+managing class instances and passing them around, making your code cleaner and more maintainable.
+
+In the end, it does it: a) creates instances of your classes, b) injects them into other classes that require them using
+constructors.
 
 ## Features
+
 - Automatic bean injection
 - Automatic bean scanning
 - Custom bean names
 - Typed array list for bean injection
-
-## Usage
-### Specifying beans
-```java
-// Annotate with @RomaritimeBean if config class holds any other beans
-@RomaritimeBean
-public class Config {
-    
-    // Class must be annotated with @RomaritimeBean if you want
-    // this bean to be injected
-    private final SomeOtherBean someOtherBean;
-    
-    public Config(@RomaritimeBean SomeOtherBean someOtherBean) {
-        this.someOtherBean = someOtherBean;
-    }
-    
-    @RomaritimeBean
-    public SomeService someService() {
-        return new SomeService();
-    }
-    
-    // You can also specify a custom bean name
-    @RomaritimeBean(name = "customBeanName")
-    public OtherService otherService() {
-        return new OtherService();
-    }
-}
-
-@RomaritimeBean
-public class SomeRepository {
-    // ...
-}
-
-// With custom bean name
-@RomaritimeBean(name = "myCustomDao")
-public class SomeDao {
-    // ...
-}
-```
-
-### Injecting beans
-```java
-@RomaritimeBean
-public class SomeService {
-    private final SomeRepository repository;
-    
-    // Sigewine automatically injects the repository bean
-    public SomeService(SomeRepository repository) {
-        this.repository = repository;
-    }
-}
-
-@RomaritimeBean
-public class ComplexService {
-    private final SomeDao dao;
-    
-    // Injects all beans that extend BaseEntity
-    @RomaritimeBean
-    private final List<BaseEntity> entities = new TypedArrayList<>(BaseEntity.class);
-    
-    // Named bean injection
-    public ComplexService(@RomaritimeBean(name = "myCustomDao") SomeDao dao) {
-        this.dao = dao;
-    }
-}
-```
-> I recommend using Lombok's `@RequiredArgsConstructor` to avoid boilerplate code.
-> Keep in mind that you won't be able to specify per-parameter bean names with it.
-
-### Scanning for beans
-```java
-// Create instance of Sigewine
-SigewineOptions options = SigewineOptions.builder()
-    .logLevel(Level.DEBUG)
-    .build();
-Sigewine sigewine = new Sigewine(options);
-
-// Scanning for beans in the package "com.example.myapp"
-Sigewine.treatment("com.example.myapp");
-/// Or... Takes the package of the class
-Sigewine.treatment(SomeClass.class);
-
-// /Getting the beans/
-SomeService service = sigewine.syringe(SomeService.class);
-```
 
 <warning title="Limitations">
 <ul>
@@ -129,4 +91,246 @@ SomeService service = sigewine.syringe(SomeService.class);
 </ul>
 </warning>
 
-## Disclaimers
+## Usage
+
+1. Specify beans using `@RomaritimeBean` annotation.
+2. Inject beans using `@RomaritimeBean` annotation in constructor.
+
+<procedure title="Simple example" id="simple-example" collapsible="true" default-state="expanded">
+
+```java
+// Define a bean with @RomaritimeBean annotation
+@RomaritimeBean
+public class Config {
+
+    private int someValue = 10;
+}
+
+// Define a class that uses the bean
+@RomaritimeBean
+public class SomeService {
+
+    private final Config config;
+
+    // Sigewine automatically injects the Config bean
+    public SomeService(Config config) {
+        this.config = config;
+    }
+
+    public void doSomething() {
+        System.out.println("Config value: " + config.getSomeValue());
+    }
+}
+
+// Create instance of SomeService
+public static void main(String[] args) {
+    // Create instance of Sigewine
+    Sigewine sigewine = new Sigewine(new SigewineOptions());
+    // Scan for beans in current package
+    sigewine.treatment("your.package.name"); // or specify a class
+
+    // Getting the beans
+    SomeService service = sigewine.syringe(SomeService.class);
+    service.doSomething(); // Outputs: Config value: 10
+}
+```
+
+The `Sigewine#treatment()` method scans the specified package for classes and methods annotated with `@RomaritimeBean`
+and
+registers them as beans.
+
+</procedure>
+
+<procedure title="Method injection" id="method-injection" collapsible="true">
+
+You may create beans using methods annotated with `@RomaritimeBean`. This allows you to creat beans from classes, which
+cannot be annotated with `@RomaritimeBean` directly.
+
+```java
+public class SomeTreatment {
+
+    @RomaritimeBean
+    public ExternalClass externalClass() {
+        return new ExternalClass();
+    }
+}
+```
+
+This will allow you to inject instance of `ExternalClass` as it was annotated with `@RomaritimeBean`. Method classes
+may require other beans as constructor parameters and Sigewine will automatically inject them.
+
+</procedure>
+
+<procedure title="Custom named beans" id="custom-named-beans" collapsible="true">
+
+Sometimes you may want to specify a custom name for your bean. You can do this by using the `name` attribute of the
+`@RomaritimeBean` annotation. This is useful when you have multiple beans of the same type and you want to
+differentiate them. When using them, you must specify the name in the constructor parameter.
+
+```java
+public class Configs {
+
+    @RomaritimeBean(name = "customProductionConfig")
+    public Config productionConfig() {
+        return new Config();
+    }
+
+    @RomaritimeBean(name = "customDevelopmentConfig")
+    public Config developmentConfig() {
+        return new Config();
+    }
+}
+
+public class ProductionService {
+
+    private final Config config;
+
+    // Injects the bean with custom name
+    public ProductionService(
+            @RomaritimeBean(name = "customProductionConfig") Config config
+    ) {
+        this.config = productionConfig;
+    }
+}
+
+public class DevelopmentService {
+
+    private final Config config;
+
+    // Injects the bean with custom name
+    public DevelopmentService(
+            @RomaritimeBean(name = "customDevelopmentConfig") Config config
+    ) {
+        this.config = config;
+    }
+}
+```
+
+</procedure>
+
+<procedure title="Abstract bean definitions" id="abstract-bean-definitions" collapsible="true">
+
+Sometimes you have a bean that implements an interface or an abstract class. Sigewine respects this and allows you to
+specify bean by the abstract class. The injected class will be the implementation of the abstract class or interface.
+
+```java
+// An abstract class that defines a service
+public abstract class BaseService {
+
+    public abstract void performAction();
+}
+
+// An implementation of the abstract class
+@RomaritimeBean
+public class ConcreteService extends BaseService {
+
+    @Override
+    public void performAction() {
+        System.out.println("Action performed by ConcreteService");
+    }
+}
+
+@RomaritimeBean
+public class ServiceConsumer {
+
+    private final BaseService service;
+
+    // Sigewine automatically injects the ConcreteService bean
+    public ServiceConsumer(BaseService service) {
+        this.service = service;
+    }
+
+    public void useService() {
+        service.performAction(); // Outputs: Action performed by ConcreteService
+    }
+}
+```
+
+</procedure>
+
+<procedure title="Collection of beans" id="collection-of-beans" collapsible="true">
+
+If you have multiple beans that extend a common base class or implement a common interface, you can inject
+them as a collection.
+
+```java
+// Define a base entity interface
+public interface BaseEntity {
+    // Common properties and methods for all entities
+}
+
+// Define player entity
+@RomaritimeBean
+public class PlayerEntity implements BaseEntity {
+    // Player specific properties and methods
+}
+
+// Define NPC entity
+@RomaritimeBean
+public class NpcEntity implements BaseEntity {
+    // NPC specific properties and methods
+}
+
+// Define a service that uses all BaseEntity beans
+@RomaritimeBean
+@RequiredArgsConstructor
+public class GameWorld {
+
+    // Injects all beans that extend BaseEntity
+    private final List<BaseEntity> entities = new TypedArrayList<>(BaseEntity.class);
+}
+```
+
+</procedure>
+
+### Lombok
+
+I recommend using Lombok's `@RequiredArgsConstructor` to avoid boilerplate code.
+Keep in mind that you won't be able to specify per-parameter bean names with it.
+
+### Extensions -- Constellations
+
+Sigewine supports extensions that allows you to process beans when they are registered. They are named <b>
+Constellations</b>.
+
+One of the existing implementation is **AOP extension**, that allows you to wrap methods of beans with additional
+functionality. Please, check the [AOP subpage](AOP.md) for more information.
+
+<procedure title="Defining constellation" id="defining-constellation" collapsible="true">
+
+```java
+public class CustomConstellation extends SigewineConstellation {
+
+    public CustomConstellation() {
+        super(10); // Priority. Smaller values are processed first.
+    }
+
+    @Override
+    public void processBeans(Sigewine sigewine) {
+        // This method is called when beans are registered.
+        // You can process them here, for example, by adding additional properties or modifying them.
+
+        // Example: Print all beans
+        sigewine.getSingletonBeans().forEach((definition, bean) -> {
+            System.out.println("Processing bean %s of type %s".formatted(
+                definition.getName(),
+                bean.getClass().getName()
+            ));
+        });
+    }
+}
+
+// Registering the constellation
+public static void main(String[] args) {
+    // Create instance of Sigewine
+    Sigewine sigewine = new Sigewine(new SigewineOptions());
+
+    // Add custom constellation
+    sigewine.addConstellation(new CustomConstellation());
+
+    // Scan for beans in current package
+    sigewine.treatment("your.package.name");
+}
+```
+
+</procedure>
