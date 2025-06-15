@@ -34,6 +34,8 @@ modules.
             implementation 'org.reflections:reflections:0.10.2'
             // Required for AOP module
             implementation 'net.bytebuddy:byte-buddy:1.17.5'
+            // Extension for AOP module
+            implementation 'enterprises.iwakura:sigewine-aop-sentry:VERSION'
         </code-block>
     </tab>
     <tab id="maven" title="Maven">
@@ -60,6 +62,12 @@ modules.
                     <groupId>net.bytebuddy</groupId>
                     <artifactId>byte-buddy</artifactId>
                     <version>1.17.5</version>
+                </dependency>
+                <!-- Extension for AOP module -->
+                <dependency>
+                    <groupId>enterprises.iwakura</groupId>
+                    <artifactId>sigewine-aop-sentry</artifactId>
+                    <version>VERSION</version>
                 </dependency>
             ]]>
         </code-block>
