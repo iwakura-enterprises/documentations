@@ -12,14 +12,19 @@
         <td><a id="sigewine_version" href="https://central.sonatype.com/artifact/enterprises.iwakura/sigewine"><img src="https://maven-badges.sml.io/sonatype-central/enterprises.iwakura/sigewine/badge.png?style=for-the-badge" alt=""></img></a></td>
     </tr>
     <tr>
-        <td>Sigewine AOP</td>
+        <td>Sigewine Core</td>
         <td><a href="https://github.com/iwakura-enterprises/sigewine">GitHub</a></td>
         <td><a id="sigewine_core_version" href="https://central.sonatype.com/artifact/enterprises.iwakura/sigewine-core"><img src="https://maven-badges.sml.io/sonatype-central/enterprises.iwakura/sigewine-core/badge.png?style=for-the-badge" alt=""></img></a></td>
     </tr>
     <tr>
-        <td>Sigewine Core</td>
+        <td>Sigewine AOP</td>
         <td><a href="https://github.com/iwakura-enterprises/sigewine">GitHub</a></td>
         <td><a id="sigewine_aop_version" href="https://central.sonatype.com/artifact/enterprises.iwakura/sigewine-aop"><img src="https://maven-badges.sml.io/sonatype-central/enterprises.iwakura/sigewine-aop/badge.png?style=for-the-badge" alt=""></img></a></td>
+    </tr>
+    <tr>
+        <td>Sigewine Sentry AOP</td>
+        <td><a href="https://github.com/iwakura-enterprises/sigewine">GitHub</a></td>
+        <td><a id="sigewine_aop_sentry_version" href="https://central.sonatype.com/artifact/enterprises.iwakura/sigewine-aop-sentry"><img src="https://maven-badges.sml.io/sonatype-central/enterprises.iwakura/sigewine-aop-sentry/badge.png?style=for-the-badge" alt=""></img></a></td>
     </tr>
     <tr>
         <td>Console Parallax</td>

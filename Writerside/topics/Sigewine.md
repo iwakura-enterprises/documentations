@@ -10,6 +10,7 @@ As of version 2.0.0, the project is split into multiple modules:
 |--------|-------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------|
 | `core` | The core library that provides the dependency injection functionality.                                                        | <include from="Maven-Versions.md" element-id="sigewine_core_version"/> |
 | `aop`  | Contains AOP-like Proxy functionality to allow wrap beans. For example, to log method calls or to add transaction management. | <include from="Maven-Versions.md" element-id="sigewine_aop_version"/>  |
+| `aop-sentry` | Provides integration with Sentry for AOP-like method interception. This module is optional and requires `sigewine-aop`. | <include from="Maven-Versions.md" element-id="sigewine_aop_sentry_version"/> |
 
 Each module has its own maven artifact. The versions between them are aligned, so you can use the same version for all
 modules.
@@ -281,6 +282,32 @@ public class GameWorld {
     private final List<BaseEntity> entities = new TypedArrayList<>(BaseEntity.class);
 }
 ```
+
+</procedure>
+
+<procedure title="Self-injected beans" id="self-injected-beans" collapsible="true">
+
+You may self-inject beans into themselves. This is useful for beans that need to call their own methods and for
+the AOP-like method interception. 
+
+> For more information regarding AOP functionalities within Sigewine, please refer to the
+[AOP subpage](AOP.md).
+
+```java
+@RomaritimeBean
+@RequiredArgsConstructor
+public class SomeService {
+
+    @RomaritimeBean
+    private SomeService self; // Self-injected bean
+}
+```
+
+<warning title="Self-injection field">
+    The self-injection field must be annotated with <code>@RomaritimeBean</code> annotation and be <b>non-final</b>.
+</warning>
+
+> If you self-inject a abstract class or an interface, Sigewine will automatically inject the implementation of that class or interface.
 
 </procedure>
 

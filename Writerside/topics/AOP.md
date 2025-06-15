@@ -3,6 +3,9 @@
 AOP extension allows you to wrap beans' methods with additional functionality, such as logging or transaction
 management. It is similar to Aspect-Oriented Programming (AOP) in other frameworks.
 
+## Current extensions:
+- [`sigewine-aop-sentry`](Sentry-AOP.md): Provides integration with Sentry for automatic transaction handling.
+
 ## Usage
 
 To use the AOP functionality, you need to add the `sigewine-aop` module to your project. Please refer

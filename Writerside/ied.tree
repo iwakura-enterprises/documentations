@@ -14,7 +14,9 @@
         <toc-element toc-title="Sigewine">
             <toc-element topic="Sigewine.md" toc-title="Core">
             </toc-element>
-            <toc-element topic="AOP.md"/>
+            <toc-element topic="AOP.md">
+                <toc-element topic="Sentry-AOP.md"/>
+            </toc-element>
         </toc-element>
         <toc-element topic="Console-Parallax.md"/>
         <toc-element topic="Pumpk1n.md"/>
