@@ -41,4 +41,9 @@
         <td><a href="https://github.com/lilmayu/nrdy-loader">GitHub</a></td>
         <td><a id="nrdy-loader_version" href="https://central.sonatype.com/artifact/dev.mayuna/nrdy-loader"><img src="https://maven-badges.sml.io/sonatype-central/dev.mayuna/nrdy-loader/badge.png?style=for-the-badge" alt=""></img></a></td>
     </tr>
+    <tr>
+        <td>irminsul</td>
+        <td><a href="https://github.com/iwakura-enterprises/irminsul">GitHub</a></td>
+        <td><a id="irminsul_version" href="https://central.sonatype.com/artifact/enterprises.iwakura/irminsul"><img src="https://maven-badges.sml.io/sonatype-central/enterprises.iwakura/irminsul/badge.png?style=for-the-badge" alt=""></img></a></td>
+    </tr>
 </table>
