@@ -46,4 +46,19 @@
         <td><a href="https://github.com/iwakura-enterprises/irminsul">GitHub</a></td>
         <td><a id="irminsul_version" href="https://central.sonatype.com/artifact/enterprises.iwakura/irminsul"><img src="https://maven-badges.sml.io/sonatype-central/enterprises.iwakura/irminsul/badge.png?style=for-the-badge" alt=""></img></a></td>
     </tr>
+    <tr>
+        <td>Keqing Core</td>
+        <td><a href="https://github.com/iwakura-enterprises/keqing">GitHub</a></td>
+        <td><a id="keqing_core_version" href="https://central.sonatype.com/artifact/enterprises.iwakura/keqing-core"><img src="https://maven-badges.sml.io/sonatype-central/enterprises.iwakura/keqing-core/badge.png?style=for-the-badge" alt=""></img></a></td>
+    </tr>
+    <tr>
+        <td>Keqing GSON</td>
+        <td><a href="https://github.com/iwakura-enterprises/keqing">GitHub</a></td>
+        <td><a id="keqing_gson_version" href="https://central.sonatype.com/artifact/enterprises.iwakura/keqing-gson"><img src="https://maven-badges.sml.io/sonatype-central/enterprises.iwakura/keqing-gson/badge.png?style=for-the-badge" alt=""></img></a></td>
+    </tr>
+    <tr>
+        <td>Keqing SnakeYAML</td>
+        <td><a href="https://github.com/iwakura-enterprises/keqing">GitHub</a></td>
+        <td><a id="keqing_snakeyaml_version" href="https://central.sonatype.com/artifact/enterprises.iwakura/keqing-snakeyaml"><img src="https://maven-badges.sml.io/sonatype-central/enterprises.iwakura/keqing-snakeyaml/badge.png?style=for-the-badge" alt=""></img></a></td>
+    </tr>
 </table>
