@@ -250,7 +250,11 @@ Method body
 : `CommandResult.error(String, Throwable)` to indicate failure. If an exception is thrown,
 : it will be caught and passed to `@ExceptionHandler` method if defined.
 
-## CommandInvocationContext
+## Interesting classes
+
+Ganyu uses several classes to represent commands, arguments and command invocation context.
+
+### CommandInvocationContext
 
 `CommandInvocationContext` is a class that contains information about the command invocation.
 
@@ -258,15 +262,15 @@ It contains fields that may be useful in command methods, pre/post-command metho
 it holds references to `Ganyu` instance, `RegisteredCommand` instance, command arguments,
 nullable `CommandResult` instance and so on.
 
-## RegisteredCommand
+### RegisteredCommand
 
-A internal class that represents a registered command. It contains information about the command,
+An internal class that represents a registered command. It contains information about the command,
 such as its name, description, syntax, method, instance, argument definitions and so on. It also
 holds references to its sub-commands.
 
 You do not directly use this class. But it is accessible via the `CommandInvocationContext` instance.
 
-## CommandArgumentDefinition
+### CommandArgumentDefinition
 
 `CommandArgumentDefinition` is a class that represents a command argument definition. It contains
 information about the argument, such as its name, type, whether it is optional, whether it is named,
