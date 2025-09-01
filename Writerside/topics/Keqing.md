@@ -53,6 +53,8 @@ assert farewell.equals("Farewell!"); // missing in lang_cs
 Keqing is separated into multiple modules, so you can include only the parts you need. All modules are accessible via
 Maven Central.
 
+> Java 8 or higher is required.
+
 | Name               | Description                                         | Version                                                                   |
 |--------------------|-----------------------------------------------------|---------------------------------------------------------------------------|
 | `keqing-core`      | The core module, required for all other modules.    | <include from="Maven-Versions.md" element-id="keqing_core_version"/>      |
@@ -62,6 +64,41 @@ Maven Central.
 <note>
 You might need to click the version badge to see the latest version.
 </note>
+
+<tabs>
+    <tab id="gradle" title="Gradle">
+        <code-block lang="groovy">
+            implementation 'enterprises.iwakura:keqing-core:VERSION'
+            implementation 'enterprises.iwakura:keqing-gson:VERSION'
+            implementation 'enterprises.iwakura:keqing-snakeyaml:VERSION'
+            // For keqing-gson and keqing-snakeyaml, GSON or SnakeYAML respectively
+            // are required as well.
+        </code-block>
+    </tab>
+    <tab id="maven" title="Maven">
+        <code-block lang="xml">
+            <![CDATA[
+            <dependency>
+                <groupId>enterprises.iwakura</groupId>
+                <artifactId>keqing-core</artifactId>
+                <version>VERSION</version>
+            </dependency>
+            <dependency>
+                <groupId>enterprises.iwakura</groupId>
+                <artifactId>keqing-gson</artifactId>
+                <version>VERSION</version>
+            </dependency>
+            <dependency>
+                <groupId>enterprises.iwakura</groupId>
+                <artifactId>keqing-snakeyaml</artifactId>
+                <version>VERSION</version>
+            </dependency>
+            <!-- For keqing-gson and keqing-snakeyaml, GSON or SnakeYAML respectively
+                 are required as well. -->
+            ]]>
+        </code-block>
+    </tab>
+</tabs>
 
 ## Loading files
 
