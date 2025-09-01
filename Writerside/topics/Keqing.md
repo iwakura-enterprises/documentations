@@ -53,13 +53,13 @@ assert farewell.equals("Farewell!"); // missing in lang_cs
 Keqing is separated into multiple modules, so you can include only the parts you need. All modules are accessible via
 Maven Central.
 
-> Java 8 or higher is required.
-
 | Name               | Description                                         | Version                                                                   |
 |--------------------|-----------------------------------------------------|---------------------------------------------------------------------------|
 | `keqing-core`      | The core module, required for all other modules.    | <include from="Maven-Versions.md" element-id="keqing_core_version"/>      |
 | `keqing-gson`      | Module for working with JSON files using Gson.      | <include from="Maven-Versions.md" element-id="keqing_gson_version"/>      |
 | `keqing-snakeyaml` | Module for working with YAML files using SnakeYAML. | <include from="Maven-Versions.md" element-id="keqing_snakeyaml_version"/> |
+
+> Java 8 or higher is required.
 
 <note>
 You might need to click the version badge to see the latest version.
