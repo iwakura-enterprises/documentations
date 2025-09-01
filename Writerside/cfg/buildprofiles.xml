@@ -10,4 +10,11 @@
         </variables>
     </build-profile>
 
+    <footer>
+        <copyright>Iwakura Enterprises</copyright>
+        <social type="github" href="https://github.com/iwakura-enterprises">GitHub homepage</social>
+        <link href="https://iwakura.enterprises">Website</link>
+        <notice>This documentation is provided with no warranty. It may contain gramatical errors. Also, hi ᗜ‿ᗜ</notice>
+    </footer>
+
 </buildprofiles>
