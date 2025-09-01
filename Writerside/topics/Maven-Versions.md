@@ -61,4 +61,9 @@
         <td><a href="https://github.com/iwakura-enterprises/keqing">GitHub</a></td>
         <td><a id="keqing_snakeyaml_version" href="https://central.sonatype.com/artifact/enterprises.iwakura/keqing-snakeyaml"><img src="https://maven-badges.sml.io/sonatype-central/enterprises.iwakura/keqing-snakeyaml/badge.png?style=for-the-badge" alt=""></img></a></td>
     </tr>
+    <tr>
+        <td>Ganyu</td>
+        <td><a href="https://github.com/iwakura-enterprises/ganyu">GitHub</a></td>
+        <td><a id="ganyu_version" href="https://central.sonatype.com/artifact/enterprises.iwakura/ganyu"><img src="https://maven-badges.sml.io/sonatype-central/enterprises.iwakura/ganyu/badge.png?style=for-the-badge" alt=""></img></a></td>
+    </tr>
 </table>
