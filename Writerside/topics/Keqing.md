@@ -2,26 +2,22 @@
 
 # Keqing
 
-<list columns="2">
-    <li>
-        <img src="https://github.com/iwakura-enterprises/keqing/blob/main/keqing-logo.png?raw=true" alt="Keqing logo" width="300" style="block" border-effect="rounded"/>
-    </li>
-    <li>
-        <p>
-            Keqing is a Java library designed to help with language files and configuration files in complex projects.
-        </p>
-        <p>
-            It provides a way to create "priorities" between the files and fill out any missing data from lower priority files.
-        </p>
-        <p>
-            Using Keqing you can easily manage multiple language files and ensure that your application always has the necessary
-            data to function correctly.
-        </p>
-        <p>
-            You may find all the documentation about Keqing on this page.
-        </p>
-    </li>
-</list>
+- <img src="https://github.com/iwakura-enterprises/keqing/blob/main/keqing-logo.png?raw=true" alt="Keqing logo" width="300" style="inline" border-effect="rounded"/>
+- <p>
+    Keqing is a Java library designed to help with language files and configuration files in complex projects.
+  </p>
+  <p>
+    It provides a way to create "priorities" between the files and fill out any missing data from lower priority files.
+  </p>
+  <p>
+    Using Keqing you can easily manage multiple language files and ensure that your application always has the necessary
+    data to function correctly.
+  </p>
+  <p>
+    You may find all the documentation about Keqing on this page.
+  </p>
+
+{columns="2"}
 
 <procedure title="Quick example" id="quick_example" collapsible="true" default-state="expanded">
 
