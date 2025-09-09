@@ -10,4 +10,10 @@
         <description>Created after removal of "Test" from Iwakura Enterprises Documentations</description>
         <accepts>Test.html</accepts>
     </rule>
+    <rule id="53762c8e">
+        <description>Created after removal of "About Iwakura Enterprises Documentations" from Iwakura Enterprises
+            Documentations
+        </description>
+        <accepts>starter-topic.html</accepts>
+    </rule>
 </rules>

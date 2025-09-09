@@ -66,4 +66,14 @@
         <td><a href="https://github.com/iwakura-enterprises/ganyu">GitHub</a></td>
         <td><a id="ganyu_version" href="https://central.sonatype.com/artifact/enterprises.iwakura/ganyu"><img src="https://maven-badges.sml.io/sonatype-central/enterprises.iwakura/ganyu/badge.png?style=for-the-badge" alt=""></img></a></td>
     </tr>
+    <tr>
+        <td>Amber Plugin</td>
+        <td><a href="https://github.com/iwakura-enterprises/amber">GitHub</a></td>
+        <td><a id="amber_plugin_version" href="https://central.sonatype.com/artifact/enterprises.iwakura/ganyu"><img src="https://img.shields.io/gradle-plugin-portal/v/enterprises.iwakura.amber-plugin?style=for-the-badge" alt=""></img></a></td>
+    </tr>
+    <tr>
+        <td>Amber Core</td>
+        <td><a href="https://github.com/iwakura-enterprises/amber">GitHub</a></td>
+        <td><a id="amber_core_version" href="https://central.sonatype.com/artifact/enterprises.iwakura/amber"><img src="https://maven-badges.sml.io/sonatype-central/enterprises.iwakura/amber-core/badge.png?style=for-the-badge" alt=""></img></a></td>
+    </tr>
 </table>

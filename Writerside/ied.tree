@@ -6,7 +6,6 @@
                  name="Iwakura Enterprises Documentations"
                  start-page="Home.md">
 
-    <toc-element topic="starter-topic.md"/>
     <toc-element topic="Home.md">
         <toc-element topic="Maven-Versions.md"/>
     </toc-element>
@@ -20,6 +19,7 @@
         </toc-element>
         <toc-element topic="Keqing.md"/>
         <toc-element topic="Ganyu.md"/>
+        <toc-element topic="Amber.md"/>
         <toc-element topic="Irminsul.md"/>
         <toc-element topic="Console-Parallax.md"/>
         <toc-element topic="Pumpk1n.md"/>
