@@ -1,4 +1,25 @@
+<show-structure depth="2"/>
+
 # Irminsul
+
+- <img src="https://github.com/iwakura-enterprises/irminsul/blob/main/irminsul-logo.png?raw=true" alt="Irminsul logo" width="300" style="inline" border-effect="rounded"/>
+- <p>
+    Irminsul is a Java library wrapping Hibernate ORM.
+  </p>
+  <p>
+    This allows you to create applications on top of Hibernate
+    with less boilerplate code.
+  </p>
+  <p>
+    It is an opinionated library, fit to suit my needs - and maybe needs of other developers as well. It should
+    not be viewed as definitive way to work with Hibernate ORM. I will probably miss out a lot of the features
+    that it provides.
+  </p>
+  <p>
+    You may find all the documentation about Irminsul on this page.
+  </p>
+
+{columns="2"}
 
 > Opinionated Hibernate ORM wrapper for Java 17+
 
@@ -29,6 +50,12 @@ var companies = companyRepository.findAll();
 ## Installation
 
 <include from="Maven-Versions.md" element-id="irminsul_version"/>
+
+> Java 17 or higher is required.
+
+<note>
+You might need to click the version badge to see the latest version.
+</note>
 
 <tabs>
     <tab id="gradle" title="Gradle">
@@ -92,8 +119,6 @@ var companies = companyRepository.findAll();
     </tab>
 </tabs>
 
-**The minimum required Java version is 17**.
-
 ## Usage
 First, we need to initialize the database service. Then, we can define our entities and initialize the repositories.
 After that, we can use the repositories to interact with the database.
@@ -101,7 +126,7 @@ After that, we can use the repositories to interact with the database.
 In the following sections, we will go through the steps to set up the database service, define entities, use repositories,
 perform transactions and more.
 
-<procedure title="Initializing Database Service" id="initializing-database-service" collapsible="true" default-state="collapsed">
+<procedure title="Initializing Database Service" id="initializing-database-service" collapsible="true" default-state="expanded">
 
 ```java
 // Load the database configuration
@@ -132,7 +157,7 @@ databaseService.runLiquibase();
 
 </procedure>
 
-<procedure title="Defining entities" id="defining-entities" collapsible="true" default-state="collapsed">
+<procedure title="Defining entities" id="defining-entities" collapsible="true" default-state="expanded">
 <step>
 
 Let's create entity called a `Company` **entity**:
@@ -208,7 +233,7 @@ Now you may use the `CompanyRepository` to interact with the `Company` entity.
 
 </procedure>
 
-<procedure title="Using repositories" id="using-repositories" collapsible="true" default-state="collapsed">
+<procedure title="Using repositories" id="using-repositories" collapsible="true" default-state="expanded">
 
 Using repositories we can perform various operations on the entities, such as finding (querying), saving and deleting them.
 The `BaseRepository` abstract class provides some basic methods for these operations.
@@ -256,7 +281,7 @@ Similarly, you may only update an entity that has an ID.
 
 </procedure>
 
-<procedure title="Adding additional methods to repositories" id="adding-methods-to-repositories" collapsible="true" default-state="collapsed">
+<procedure title="Adding additional methods to repositories" id="adding-methods-to-repositories" collapsible="true" default-state="expanded">
 
 In practice, we often need more than just basic CRUD operations. You may simply add new methods into your repository
 to suit your needs. For example, let's say we want to find a company by its name:
@@ -296,7 +321,7 @@ public class CompanyRepository extends BaseRepository<Company, Long> {
 
 </procedure>
 
-<procedure title="Transactions" id="transactions" collapsible="true" default-state="collapsed">
+<procedure title="Transactions" id="transactions" collapsible="true" default-state="expanded">
 
 **All interactions with the database are done within a transaction** by default. You can run a transaction using the
 `runInThreadTransaction()` method of the `IrminsulDatabaseService`. This method takes a lambda function
@@ -345,7 +370,7 @@ and transaction.
 
 </procedure>
 
-<procedure title="After commit and rollback actions" id="commit-rollback-actions" collapsible="true" default-state="collapsed">
+<procedure title="After commit and rollback actions" id="commit-rollback-actions" collapsible="true" default-state="expanded">
 
 Within a transactions, you may define a callback that will be executed after the transaction is committed or rolled back.
 
@@ -377,7 +402,7 @@ Throwing an exception in these actions may result in unexpected behavior.
 
 </procedure>
 
-<procedure title="Extending the database service class" id="extending-database-service" collapsible="true" default-state="collapsed">
+<procedure title="Extending the database service class" id="extending-database-service" collapsible="true" default-state="expanded">
 
 You may extend the `IrminsulDatabaseService` class for extra configuration or functionality. There are some methods
 that allows you to easily customize the logic around transactions.

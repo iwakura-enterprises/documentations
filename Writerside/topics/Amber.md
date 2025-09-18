@@ -66,8 +66,6 @@ public class AmberMain {
 
 Amber is available on Maven Central and Gradle Plugin Portal.
 
-> As of 2025-09-09, the Amber plugin was not yet approved on Gradle Plugin Portal.
-
 | Name         | Description       | Version                                                               |
 |--------------|-------------------|-----------------------------------------------------------------------|
 | Amber Core   | The Java library  | <include from="Maven-Versions.md" element-id="amber_core_version"/>   |
