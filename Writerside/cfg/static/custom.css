@@ -1,0 +1,44 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap');
+
+@font-face {
+    font-family: Lain;
+    src: url(lain.ttf);
+}
+
+.title__content {
+    font-family: "JetBrains Mono";
+}
+
+.article__p {
+    font-family: "Poppins", sans-serif;
+    text-align: justify;
+}
+
+.wh-header__product-name {
+    font-family: lain, sans-serif;
+}
+
+:root {
+    --rs-color-black: rgb(30, 30, 46);
+    --wh-color-backlight-pale-dark: rgb(30, 30, 46);
+    --rs-color-grey-90: #000000;
+    --rs-color-grey-95: rgb(24, 24, 36);
+}
+
+.article__h1 {
+    padding-top: 0;
+    margin-top: 0;
+}
+
+.toc-item--level-0 {
+    font-weight: bold;
+}
+
+.table__th {
+    font-weight: bold;
+}
+
+.table__wrapper--wide {
+    width: 83%;
+}

@@ -69,7 +69,7 @@
     <tr>
         <td>Amber Plugin</td>
         <td><a href="https://github.com/iwakura-enterprises/amber">GitHub</a></td>
-        <td><a id="amber_plugin_version" href="https://central.sonatype.com/artifact/enterprises.iwakura/ganyu"><img src="https://img.shields.io/gradle-plugin-portal/v/enterprises.iwakura.amber-plugin?style=for-the-badge" alt=""></img></a></td>
+        <td><a id="amber_plugin_version" href="https://plugins.gradle.org/plugin/enterprises.iwakura.amber"><img src="https://img.shields.io/gradle-plugin-portal/v/enterprises.iwakura.amber?style=for-the-badge" alt=""></img></a></td>
     </tr>
     <tr>
         <td>Amber Core</td>

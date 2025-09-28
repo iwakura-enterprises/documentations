@@ -3,18 +3,31 @@
 <buildprofiles xsi:noNamespaceSchemaLocation="https://resources.jetbrains.com/writerside/1.0/build-profiles.xsd"
                xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 
-    <variables></variables>
+    <variables>
+        <primary-color>purple</primary-color>
+        <custom-favicons>iwakura-enterprises-favicon.png</custom-favicons>
+        <header-logo>iwakura-enterprises-favicon.png</header-logo>
+        <product-web-url>https://docs.iwakura.enterprises</product-web-url>
+        <download-title>Homepage</download-title>
+        <download-page>https://iwakura.enterprises</download-page>
+        <showDownloadButton>true</showDownloadButton>
+        <custom-css>custom.css</custom-css>
+        <content-max-width>1300</content-max-width>
+        <resizable-sidebar>true</resizable-sidebar>
+    </variables>
     <build-profile instance="ied">
         <variables>
+            <offline-docs>true</offline-docs>
             <noindex-content>false</noindex-content>
         </variables>
+        <sitemap priority="0.35" change-frequency="monthly"/>
     </build-profile>
 
     <footer>
         <copyright>Iwakura Enterprises</copyright>
         <social type="github" href="https://github.com/iwakura-enterprises">GitHub homepage</social>
         <link href="https://iwakura.enterprises">Website</link>
-        <notice>This documentation is provided with no warranty. It may contain gramatical errors. Also, hi ᗜ‿ᗜ</notice>
+        <notice>This documentation is provided with no warranty. Also, hi ᗜ‿ᗜ</notice>
     </footer>
 
 </buildprofiles>

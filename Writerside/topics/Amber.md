@@ -2,7 +2,6 @@
 
 # Amber
 
-- <img src="https://github.com/iwakura-enterprises/amber/blob/main/amber-logo.png?raw=true" alt="Amber logo" width="300" style="inline" border-effect="rounded"/>
 - <p>
     Amber is a Java library and Gradle plugin for managing and
     downloading dependencies from repositories at runtime.
@@ -17,6 +16,7 @@
   <p>
     You may find all the documentation about Amber on this page.
   </p>
+- <img src="https://github.com/iwakura-enterprises/amber/blob/main/amber-logo.png?raw=true" alt="Amber logo" width="300" style="inline" border-effect="rounded"/>
 
 {columns="2"}
 

@@ -2,7 +2,6 @@
 
 # Keqing
 
-- <img src="https://github.com/iwakura-enterprises/keqing/blob/main/keqing-logo.png?raw=true" alt="Keqing logo" width="300" style="inline" border-effect="rounded"/>
 - <p>
     Keqing is a Java library designed to help with language files and configuration files in complex projects.
   </p>
@@ -16,6 +15,7 @@
   <p>
     You may find all the documentation about Keqing on this page.
   </p>
+- <img src="https://github.com/iwakura-enterprises/keqing/blob/main/keqing-logo.png?raw=true" alt="Keqing logo" width="300" style="inline" border-effect="rounded"/>
 
 {columns="2"}
 

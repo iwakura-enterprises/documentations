@@ -2,7 +2,6 @@
 
 # Ganyu
 
-- <img src="https://github.com/iwakura-enterprises/ganyu/blob/main/ganyu-logo.png?raw=true" alt="Ganyu logo" width="300" style="inline" border-effect="rounded"/>
 - <p>
     Ganyu is a Java library that allows you to create easy CLI.
   </p>
@@ -15,6 +14,7 @@
   <p>
     You may find all the documentation about Ganyu on this page.
   </p>
+- <img src="https://github.com/iwakura-enterprises/ganyu/blob/main/ganyu-logo.png?raw=true" alt="Ganyu logo" width="300" style="inline" border-effect="rounded"/>
 
 {columns="2"}
 
