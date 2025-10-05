@@ -214,9 +214,18 @@ true.
 : Specifies an exit code to be used after the bootstrapping process is completed. If set to null, the application will
 continue running after bootstrapping. Defaults to null.
 
+`exitMessageAfterDownload`
+: Specifies a message to be logged after the bootstrapping process is completed and before exiting, if
+`exitCodeAfterDownload` is not null. If set to null, no message will be logged. Defaults to null.
+
 `libraryDirectoryOverride`
 : Overrides the library directory specified in the MANIFEST.MF. If set to null, the library directory from the
 MANIFEST.MF will be used. Defaults to null.
+
+`downloaderThreadCount`
+: Specifies the number of threads to be used for downloading dependencies. A higher number of threads may speed up
+the bootstrapping process significantly, especially when downloading many small dependencies. Defaults to twice the
+number of available processors.
 
 ### Bootstrapping process
 
@@ -240,7 +249,11 @@ Amber tries all the repositories specified in the manifest to find the dependenc
 downloaded to the temporary directory with its name and random UUID, thus preventing duplicate file names.
 
 This process can fail if the dependency is not found or able to be downloaded from any repository and
-`failOnMissingDependency` is true.
+`failOnMissingDependency` is true. This process may also fail if there's an exception during download or I/O exception
+when moving the downloaded dependency.
+
+> As of version 1.0.2, dependencies are downloaded in parallel using a executor service with a fixed thread pool. The
+> number of threads is determined by the `downloaderThreadCount` option.
 
 #### 4. Checksum validation
 
