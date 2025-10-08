@@ -296,7 +296,7 @@ public class GameWorld {
 <procedure title="Self-injected beans" id="self-injected-beans" collapsible="true">
 
 You may self-inject beans into themselves. This is useful for beans that need to call their own methods and for
-the AOP-like method interception. 
+the AOP-like method interception.
 
 > For more information regarding AOP functionalities within Sigewine, please refer to the
 [AOP subpage](AOP.md).

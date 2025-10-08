@@ -3,16 +3,14 @@
         SYSTEM "https://resources.jetbrains.com/writerside/1.0/product-profile.dtd">
 
 <instance-profile id="ied"
-                 name="Iwakura Enterprises Documentations"
+                 name="Iwakura Enterprises Docs"
                  start-page="Home.md">
 
     <toc-element topic="Home.md">
         <toc-element topic="Maven-Versions.md"/>
     </toc-element>
     <toc-element toc-title="Libraries">
-        <toc-element toc-title="Sigewine">
-            <toc-element topic="Sigewine.md" toc-title="Core">
-            </toc-element>
+        <toc-element topic="Sigewine.md">
             <toc-element topic="AOP.md">
                 <toc-element topic="Sentry-AOP.md"/>
             </toc-element>
@@ -21,12 +19,14 @@
         <toc-element topic="Ganyu.md"/>
         <toc-element topic="Amber.md"/>
         <toc-element topic="Irminsul.md"/>
-        <toc-element topic="Console-Parallax.md"/>
-        <toc-element topic="Pumpk1n.md"/>
-        <toc-element toc-title="Mayu's JSON Utilities"/>
-        <toc-element toc-title="Mayu's JDA Utilities"/>
-        <toc-element toc-title="Time Stop Protocol"/>
-        <toc-element topic="Nrdy-Loader.md"/>
+        <toc-element topic="JDA-Interactables.md"/>
+        <toc-element toc-title="Old / Misc">
+            <toc-element topic="Console-Parallax.md"/>
+            <toc-element toc-title="Mayu's JSON Utilities"/>
+            <toc-element toc-title="Time Stop Protocol"/>
+            <toc-element topic="Nrdy-Loader.md"/>
+            <toc-element topic="Pumpk1n.md"/>
+        </toc-element>
         <toc-element toc-title="Simple Java API Wrapper">
             <toc-element topic="Documentation.md"/>
             <toc-element toc-title="Implementations">
@@ -37,7 +37,7 @@
         </toc-element>
     </toc-element>
     <toc-element toc-title="Frameworks">
-        <toc-element toc-title="Modular Discord Bot"/>
+        <toc-element topic="Modular-Discord-Bot.md"/>
     </toc-element>
     <toc-element toc-title="Minecraft Mods">
         <toc-element topic="Colored-End-Crystals.md"/>

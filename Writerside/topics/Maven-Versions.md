@@ -76,4 +76,9 @@
         <td><a href="https://github.com/iwakura-enterprises/amber">GitHub</a></td>
         <td><a id="amber_core_version" href="https://central.sonatype.com/artifact/enterprises.iwakura/amber"><img src="https://maven-badges.sml.io/sonatype-central/enterprises.iwakura/amber-core/badge.png?style=for-the-badge" alt=""></img></a></td>
     </tr>
+    <tr>
+        <td>JDA Interactables</td>
+        <td><a href="https://github.com/iwakura-enterprises/jda-interactables">GitHub</a></td>
+        <td><a id="jda_interactables_version" href="https://central.sonatype.com/artifact/enterprises.iwakura/jda-interactables"><img src="https://maven-badges.sml.io/sonatype-central/enterprises.iwakura/jda-interactables/badge.png?style=for-the-badge" alt=""></img></a></td>
+    </tr>
 </table>

@@ -16,4 +16,8 @@
         </description>
         <accepts>starter-topic.html</accepts>
     </rule>
+    <rule id="8e752ee">
+        <description>Created after removal of "Core" from Iwakura Enterprises Documentations</description>
+        <accepts>Sigewine.html</accepts>
+    </rule>
 </rules>
