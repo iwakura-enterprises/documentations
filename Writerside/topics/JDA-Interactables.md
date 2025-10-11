@@ -15,6 +15,8 @@
 
 {columns="2"}
 
+<warning>This is documentation for version 2.x.x. If you're looking for version 1.1.0, please see <a href="JDA-Interactables-110.md">the old JDA-Interactables docs page</a>.</warning>
+
 ## Installation
 
 JDA Interactables is available on Maven Central.
@@ -48,7 +50,7 @@ You might need to click the version badge to see the latest version.
 
 ## Registering listener
 
-To use JDA Interactables, you need to register the `InteractableListener` to your JDA instance. This listeners handles
+To use JDA Interactables, you need to register the `InteractableListener` to your JDA instance. This listener handles
 all interactable events from Discord and routes them to the correct interactables.
 
 ```java
@@ -60,216 +62,335 @@ ShardManager shardManager = /* ... */;
 shardManager.addEventListener(new InteractableListener());
 ```
 
-## Interactables
+By default, the listener processes interaction events asynchronously using the `Executors#newCachedThreadPool()`. You
+may specify your own
+`Executor` by using the constructor that takes an `Executor` as a parameter.
 
-As of version 1.0.2, there are tree types of interactables you can create. Most of the classes have
-static methods to create the interactables. The `InteractiveRowedMessage` has a builder for easier
-creation of add select menus in multiple rows.
+> All internals of JDA Interactables are made to be thread-safe.
 
-All interactables hold a unique ID (`#getId()`), their expiry duration (`#setExpiryDuration()`),
-list of expire callbacks (`#addExpiryCallback()`) and whitelisted users. Using the expiry duration,
-you may control how long the interactable is valid. After the duration, the interactable will expire
-and the expiry callbacks will be invoked.
+## Usage - Interactables
 
-### Messages
+As of version 2.0.0, JDA Interactables are more flexible than ever. You can create interactables for both messages
+and modals, `InteractableMessage` and `InteractableModal` respectively. Both classes implement the base abstract
+class `Interactable` that contains ID, expiry duration, interaction rules and interaction denied callbacks.
 
-Both `InteractiveMessage` and `InteractiveRowedMessage` are used to create messages with interactable components.
-The difference for `InteractiveRowedMessage` is that it allows you to create messages with multiple rows of select
-menus.
+### ID
 
-You may send or reply with these interactables using the `send`, `reply` or `editOriginal` methods that should
-cover the majority of use cases. If not, please create an issue on the
-[GitHub repository](https://github.com/iwakura-enterprises/jda-interactables).
+Each interactable has a unique ID to identify it. Currently, it is used by `InteractableModal` to identify which
+modal was submitted. When you create buttons, select menus or other components, you don't need to set their IDs
+because they will be randomized anyway. If you have to set an ID (for example, within a builder), just set it to
+some kind of placeholder.
 
-The message interactables also allow you to easily add whitelisting for users that are allowed to interact with the
-message using the `addUsersToWhitelist()` method.
+### Expiry duration
 
-### Modals
+All interactables are designed to be temporary. The default expiry duration is 5 minutes, but you can change it by using
+the `#setExpiryDuration()` method. Once the expiry duration is reached, the interactable will be removed
+from the internal registry and will no longer be usable.
 
-Same as messages, `InteractiveModal` allows you to create modal with a listener on user's modal submission. They do not
-support whitelisting as no other user than the opener can see the modal. However, the expiry duration and expiry
-callbacks are still supported.
+If you need, you can manually unregister any interactable by using the `InteractableListener#removeInteractable()`
+method.
 
-## InteractiveMessage
+> Keep in mind that manually removing an interactable will not trigger the expiry callback and may lead to
+`ConcurrentModificationException` if you try to remove it while its being processed.
 
-You may create an `InteractiveMessage` using these static methods.
+Once an interactable expires, the expiry callback will be triggered. You may add an expiry callback by using the
+`#addExpiryCallback()` method. Useful for cleaning up messages that should no longer be visible to users.
 
-`createEmpty()`
-: Creates empty `InteractiveMessage` without any content. Before sending/replying, you must set the
-`MessageEditBuilder`.
+### Interaction rules
 
-`create(MessageEditBuilder)`
-: Creates `InteractiveMessage` with specified `MessageEditBuilder`.
+By default, all interactables can be used by anyone. If you want to restrict the usage to a specific user, role or
+any other condition, you can use the `#addInteractionRule()` method. The interaction rule is a predicate that returns
+either `ALLOW`, `DENY` or `NEUTRAL`. The first `ALLOW` or `DENY` will be used to determine whether the interaction
+is allowed or not.
 
-`create(MessageEditBuilder, SelectMenu.Builder)`
-: Creates `InteractiveMessage` with specified `MessageEditBuilder` and a single select menu. The select menu's ID will
-be randomized.
-I recommend using the `createStringSelectMenu` or `createEntitySelectMenu` methods instead.
+<note>
+You may use <code>InteractionRules</code> class to get some common rules, such as allowing only a specific user or role.
+</note>
 
-`createStringSelectMenu(MessageEditBuilder, String)`
-: Creates `InteractiveMessage` with specified `MessageEditBuilder` and a string select
-menu with the specified placeholder.
+If the interaction is denied, the interaction denied callbacks will be triggered. For more information about these,
+please see the [Interaction denied callbacks](#interaction-denied-callbacks) section.
 
-`createEntitySelectMenu(MessageEditBuilder, String, List<SelectTarget>)`
-: Creates `InteractiveMessage` with specified `MessageEditBuilder` and an entity select
-menu with the specified placeholder and target types.
+### Interaction denied callbacks
 
-> If you need to add more select menus, you may use the [`InteractiveRowedMessage`](#interactiverowedmessage)
+Interactables support a callback that will be invoked upon denied interaction for user who has not passed any of the
+interaction rules. You can add a callback by using the `#addInteractionDeniedCallback()` method.
 
-### Adding interactions
+Within the callback, you are given an access to the `InteractionEventContext` that holds the interaction event
+causing the interaction (such as `ButtonInteractionEvent` or `SelectMenuInteractionEvent`). Using the helper methods,
+you may get the user, member, guild or event itself. It is recommended to process these denied callbacks to let
+the user know why their interaction was denied and why the application is not responding.
 
-You may add interactions via the `addInteraction(Interaction, Consumer<GroupedInteractionEvent>)` method. There are
-few restrictions set by Discord on how many types of components you may add to a message.
+<note>
+You may use <code>InteractionDeniedCallbacks</code> class to get some common callbacks, such as sending an ephemeral message
+or embed(s).
+</note>
 
-| Type                | Max per message/component |
-|---------------------|---------------------------|
-| Buttons             | 25 total, 5 per row       |
-| String select items | 25 in one select menu     |
+## Interactable Message
 
-The first argument, [`Interaction`](#interaction-class), specifies what kind of interaction you want to add.
-
-The second argument, `Consumer<GroupedInteractionEvent>`, is the callback that will be invoked upon user's action. Using
-the [`GroupedInteractionEvent`](#groupedinteractionevent-class), you may retrieve the user who interacted, the message,
-and other useful information. As well as the event type and thus the event itself.
-
-You can also add empty interaction via `addInteractionEmpty(Interaction)`, if needed.
-
-<warning>
-You cannot add interaction for entity select menus due to Discord's limitations.
-</warning>
-
-In order to handle entity select menus interactions, you can use the `onEntitySelectMenuInteracted()` method
-that will be invoked upon user's confirmation of the entity select menu. There is also `onStringSelectMenuInteracted()`
-for string select menus, if needed. Keep in mind the string select menus do invoke the Interaction callbacks.
-
-> After handling the interaction, you still have to defer reply or defer edit! This is not done automatically.
-
-## InteractiveRowedMessage
-
-Same as `InteractiveMessage`, but allows you to create interactive messages but with multiple rows of select menus and
-other interactables. The main difference is that you use a builder to create this message and specify the
-rows of select menus and other interactables.
-
-`#builder(MessageEditBuilder)`
-: Creates a new builder with the specified `MessageEditBuilder`.
-
-### Builder
-
-The builder allows you to add multiple rows of select menus and other interactables.
-
-`#onInteraction(int, Interaction, Consumer<GroupedInteractionEvent>)`
-: Adds an interaction on the specified 0-based row. The `Consumer<GroupedInteractionEvent>` is the interaction
-callback that will be invoked upon user's action. For select menus, there are other helper methods for convenience.
-
-> You may only add 5 buttons per row due to Discord's limitations.
-
-`#addStringSelectMenu(int, String)`
-: Adds a string select menu on the specified 0-based row with the specified placeholder.
-
-`#addStringSelectMenu(int, String, Consumer<Builder>)`
-: Adds a string select menu on the specified 0-based row with the specified placeholder. You may further customize the
-select menu using the `Consumer<StringSelectMenu.Builder>` callback.
-
-`#addStringSelectMenu(int, String, Consumer<Builder>, Consumer<Event>)`
-: Adds a string select menu on the specified 0-based row with the specified placeholder. You may further customize the
-select menu using the `Consumer<StringSelectMenu.Builder>` callback. The `Consumer<Event>` is the interaction callback
-that will be invoked upon user's selection.
-
-`#addEntitySelectMenu(int, String, List<SelectTarget>)`
-: Adds an entity select menu on the specified 0-based row with the specified placeholder and target types.
-
-`#addEntitySelectMenu(int, String, List<SelectTarget>, Consumer<Builder>)`
-: Adds an entity select menu on the specified 0-based row with the specified placeholder and target types. You may
-further customize the select menu using the `Consumer<EntitySelectMenu.Builder>` callback.
-
-`#addEntitySelectMenu(int, String, List<SelectTarget>, Consumer<Builder>, Consumer<Event>)`
-: Adds an entity select menu on the specified 0-based row with the specified placeholder and target types. You may
-further customize the select menu using the `Consumer<EntitySelectMenu.Builder>` callback. The `Consumer<Event>` is the
-interaction callback that will be invoked upon user's selection.
-
-`#onStringSelectMenuInteracted(int, Consumer<StringSelectInteractionEvent>)`
-: Adds a callback that will be invoked upon user's confirmation of string select menu on the specified 0-based row.
-
-`#onEntitySelectMenuInteracted(int, Consumer<EntitySelectInteractionEvent>)`
-: Adds a callback that will be invoked upon user's confirmation of entity select menu on the specified 0-based row.
-
-> After handling the interaction, you still have to defer reply or defer edit! This is not done automatically.
-
-## InteractiveModal
-
-Allows you to create interactive modal that will invoke a callback upon user's modal submission. On the contrary to messages,
-the `InteractiveModal` is quite simple to use due to its nature. Same as for `InteractiveMessage`, you create the
-`InteractiveModal` using static methods.
-
-`#createTitled(String, Consumer<Builder>, Consumer<Event>)`
-: Creates new `InteractiveModal` with the specified title. You may further customize the modal using the
-`Consumer<Modal.Builder>` callback. The `Consumer<Event>` is the callback that will be invoked upon user's
-modal submission.
-
-You may reply with the modal using the `replyModal` method to any `IModalCallback` event, such as
-`ButtonInteractionEvent` and others.
-
-> You do not have to set the modal's ID, as it will be randomized for you.
-
-> After handling the interaction, you still have to defer reply or defer edit! This is not done automatically.
-
-## `Interaction` class
-
-Using this class, you may create different types of interactions to be added to messages. Some for other classes,
-you create the `Interaction` instances using static methods.
-
-`#asButton(Button)`
-: Creates interaction for the specified button. The button's ID will be randomized.
-
-`#asButton(ButtonStyle, String)`
-: Creates interaction for a button with the specified style and label. The button's ID will be randomized.
-
-`#asButton(ButtonStyle, String, boolean)`
-: Creates interaction for a button with the specified style, label and disabled state. The button's ID will be
-randomized.
-
-`#asButton(ButtonStyle, String, Emoji)`
-: Creates interaction for a button with the specified style, label and emoji. The button's ID will be randomized.
-
-`#asButton(ButtonStyle, String, Emoji, boolean)`
-: Creates interaction for a button with the specified style, label, emoji and disabled state. The button's ID will be
-randomized.
-
-`#asButton(ButtonStyle, Emoji)`
-: Creates interaction for a button with the specified style and emoji. The button's ID will be randomized.
-
-`#asButton(ButtonStyle, Emoji, boolean)`
-: Creates interaction for a button with the specified style, emoji and disabled state. The button's ID will be
-randomized.
-
-`#asSelectOption(SelectOption)`
-: Creates interaction for the specified string select option. The select option's ID will be randomized.
-
-`#asSelectOption(String)`
-: Creates interaction for string select option with the specified label. The select option's ID will be randomized.
-
-`#asSelectOption(String, String)`
-: Creates interaction for string select option with the specified label and description. The select option's ID
-will be randomized.
-
-`#asSelectOption(String, String, boolean)`
-: Creates interaction for string select option with the specified label, description and if the option will be
-selected by default. The select option's ID will be randomized.
-
-`#asSelectOption(String, String, boolean, Emoji)`
-: Creates interaction for string select option with the specified label, description, if the option will be
-selected by default and emoji. The select option's ID will be randomized.
-
-`#asSelectOption(String, String, Emoji)`
-: Creates interaction for string select option with the specified label, description and emoji. The select option's ID
-will be randomized.
-
-> There are more methods but for sake of brevity, I have omitted them.
-
-## `GroupedInteractionEvent` class
-
-An utility class that groups all interaction events into one class. Using this class, you may retrieve
-the user who interacted, the message, and other useful information. As well as the event type and thus the event itself.
-
-You may also easily defer replies and defer edits, with `#deferReply()` and `#deferEdit()` methods respectively. You may
-also use this to reply with modal using the `#replyModal(Modal)` method.
+You may create an interactable components for a message using the `InteractableMessage` class. This class allows you to
+create buttons, select menus and other components that can be interacted with using the `#addInteraction()` method. This
+method takes an `Interaction` and a callback that will be invoked when the interaction is used.
+
+```java
+InteractableMessage msg = new InteractableMessage();
+
+Button doSomethingButton = interactableMessage.addInteraction(
+  Interaction.asButton(ButtonStyle.SUCCESS, "Do something!"),
+  (event) -> {
+    event.reply("Did something!").queue();
+    log.info("Did something!");
+    return Result.REMOVE;
+});
+```
+
+As you can see in the code above, the `Interaction.asButton()` method is used to create a button interaction with
+specified button parameters. The callback is a lambda that has the `ButtonInteractionEvent` as its parameter. The
+callback also returns a `Result` that determines whether the interaction should be removed or not. If you want to keep
+the interaction, return `Result.KEEP`. If you want to remove the interaction after it is used, return `Result.REMOVE`.
+
+<note>
+You may also use specify two-parameter callback that provides the <code>InteractableMessage</code> itself, along with the event.
+</note>
+
+After creating the interactable button, you may add it to the message using the `ActionRow` or within
+[JDA's Components V2 builder.](https://github.com/discord-jda/JDA/blob/master/src/examples/java/ComponentsV2Example.java)
+
+In order for the message to be actually interactable, you need to register the interactable. This can be done using the
+`InteractableListener#registerNow()` method or the `InteractableListener#registerOnCompleted()` method that returns
+a Consumer callback to be used with JDA's `queue()` method.
+
+```java
+// Example of handling a slash command event
+SlashCommandInteractionEvent event = /* ... */;
+InteractableMessage interactableMessage = new InteractableMessage();
+
+// Create interactable button
+Button doSomethingButton = interactableMessage.addInteraction(
+  Interaction.asButton(ButtonStyle.SUCCESS, "Do something!"),
+  (event) -> {
+    event.reply("Did something!").queue();
+    log.info("Did something!");
+    return Result.REMOVE;
+});
+
+// Create a message to be sent
+ActionRow actionRow = ActionRow.of(doSomethingButton);
+MessageCreateData message = new MessageCreateBuilder()
+    .addComponents(actionRow)
+    .build();
+
+// Reply to the slash command event
+slashEvent.reply(message)
+  // Upon successful sending, register the interactable
+  .queue(interactableMessage.registerOnCompleted());
+```
+
+<img src="jda-interactables-do-something-button.png" alt="JDA Interactables Do Something Button" width="600" style="inline" border-effect="rounded"/>
+
+Upon clicking the button, the callback will be invoked and the interaction will be processed, thus replying with "Did
+something!" and logging the message to the console.
+
+### Button
+
+You may create an interactable button using the `Interaction.asButton()` method. Please, refer to
+the [Interactable Message](#interactable-message) section for more information.
+
+### String Select Menu
+
+You may also create interactable string select menu or interactable select options within the select menu. This can be
+done by using the `Interaction.asStringSelectMenu()` and `Interaction.asSelectOption()` methods respectively.
+
+#### Entire String Select Menu
+
+The `Interaction.asStringSelectMenu()` returns interactable string select menu that will trigger the callback when
+any of the options are selected. This can be useful when you want to handle multiple options within the same callback.
+
+```java
+// Example of handling a slash command event
+SlashCommandInteractionEvent event = /* ... */;
+InteractableMessage interactableMessage = new InteractableMessage();
+
+// Create select options...
+SelectOption black = SelectOption.of("Black", "black");
+SelectOption blue = SelectOption.of("Blue", "blue");
+SelectOption green = SelectOption.of("Green", "green");
+SelectOption orange = SelectOption.of("Orange", "orange");
+SelectOption purple = SelectOption.of("Purple", "purple");
+SelectOption red = SelectOption.of("Red", "red");
+SelectOption white = SelectOption.of("White", "white");
+SelectOption yellow = SelectOption.of("Yellow", "yellow");
+
+// Create interactable string select menu
+StringSelectMenu colorSelectMenu = interactableMessage.addInteraction(
+  Interaction.asStringSelectMenu(
+      "Select your favorite color", // Placeholder
+      2, // Min values
+      10, // Max values
+      black, blue, green, orange, purple, red, white, yellow
+  ),
+  (event) -> {
+    String selected = String.join(", ", event.getValues());
+    event.reply("You selected: " + selected).queue();
+    return Result.REMOVE;
+  }
+);
+
+// Create a message to be sent
+ActionRow actionRow = ActionRow.of(colorSelectMenu);
+MessageCreateData message = new MessageCreateBuilder()
+  .addComponents(actionRow)
+  .build();
+
+// Reply to the slash command event
+slashEvent.reply(message)
+  .queue(interactableMessage.registerOnCompleted());
+```
+
+<video src="jda-interactables-favorite-colors.mp4" preview-src="jda-interactables-favorite-colors.png"/>
+
+#### Individual Select Options
+
+If you want to handle each select option individually, you can use the `Interaction.asSelectOption()` method to create
+interactable select options. Each option will have its own callback that will be invoked when the option is selected.
+
+```java
+// Example of handling a slash command event
+SlashCommandInteractionEvent slashEvent = /* ... */;
+InteractableMessage interactableMessage = new InteractableMessage();
+
+// Create interactable select options
+SelectOption good = interactableMessage.addInteraction(
+  Interaction.asSelectOption("Good"),
+  (event) -> {
+    event.reply("Yay!").queue();
+    return Result.REMOVE;
+  }
+);
+
+SelectOption gloomy = interactableMessage.addInteraction(
+  Interaction.asSelectOption("Gloomy"),
+  (event) -> {
+    event.reply("Aww... Cheer up!").queue();
+    return Result.REMOVE;
+  }
+);
+
+SelectOption neutral = interactableMessage.addInteraction(
+  Interaction.asSelectOption("Neutral"),
+  (event) -> {
+    event.reply("Meh.").queue();
+    return Result.REMOVE;
+  }
+);
+
+// Create a string select menu with the interactable options
+// The "random-id" is just a placeholder and will be replaced internally
+StringSelectMenu moodSelectMenu = StringSelectMenu.create("random-id")
+  .addOptions(good, gloomy, neutral)
+  .setPlaceholder("How are you feeling today?")
+  .build();
+
+// Create a message to be sent
+ActionRow actionRow = ActionRow.of(moodSelectMenu);
+MessageCreateData message = new MessageCreateBuilder()
+  .addComponents(actionRow)
+  .build();
+
+// Reply to the slash command event
+slashEvent.reply(message)
+  .queue(interactableMessage.registerOnCompleted());
+```
+
+<video src="jda-interactables-mood-select.mp4" preview-src="jda-interactables-mood-select.png"/>
+
+### Entity Select Menu
+
+You may also create interactable entity select menus that will invoke the callback when the selection is confirmed.
+Discord does not support handling selected each entity invidually, so there's just one way to create these
+interactables.
+
+```java
+// Example of handling a slash command event
+SlashCommandInteractionEvent slashEvent = /* ... */;
+InteractableMessage interactableMessage = new InteractableMessage();
+
+// Create interactable entity select menu for users and roles
+EntitySelectMenu userSelectMenu = interactableMessage.addInteraction(
+  Interaction.asEntitySelectMenu(
+    "Select users and/or roles", // Placeholder
+    2, // Min values
+    10, // Max values
+    SelectTarget.USER, SelectTarget.ROLE // Allow both users and roles
+  ),
+  (event) -> {
+    StringBuilder reply = new StringBuilder("You selected:\n");
+    event.getValues().forEach(entity -> reply.append("- ").append(entity.getAsMention()).append("\n"));
+    event.reply(reply.toString()).queue();
+    return Result.REMOVE;
+  }
+);
+
+// Create a message to be sent
+ActionRow actionRow = ActionRow.of(userSelectMenu);
+MessageCreateData message = new MessageCreateBuilder()
+  .addComponents(actionRow)
+  .build();
+
+// Reply to the slash command event
+slashEvent.reply(message)
+  .queue(interactableMessage.registerOnCompleted());
+```
+
+<video src="jda-interactables-users-and-or-roles.mp4" preview-src="jda-interactables-users-and-or-roles.png"/>
+
+## Modals
+
+You may create an interactable modal using the `InteractableModal` class. This class allows you to create modals that
+will trigger the callback when the modal is submitted. Contrary to [interactable messages](#interactable-message),
+modals can only have one callback that is specified in the constructor. You must also link the interactive modal with
+the actual modal in order for the submission to be processed. This will set a random ID to the modal.
+
+```java
+// Example of handling a slash command event
+SlashCommandInteractionEvent slashEvent = /* ... */;
+
+// Create interactable modal with a callback
+InteractableModal interactableModal = new InteractableModal(event -> {
+  String name = event.getValue("name").getAsString();
+  String reason = event.getValue("reason").getAsString();
+  String math = event.getValue("math").getAsString();
+
+  event.reply("Thank you for your application!\n"
+    + "Name: " + name + "\n"
+    + "Reason: " + reason + "\n"
+    + "Math: " + math).queue();
+  return Result.REMOVE;
+});
+
+// Create a modal builder
+Modal.Builder modalBuilder = Modal.create("random-id", "Job Application")
+  .addComponents(
+    TextDisplay.of("# Welcome!\nPlease, fill out the form below."),
+    Label.of(
+      "Name",
+      TextInput.of("name", TextInputStyle.SHORT)
+    ),
+    Label.of(
+      "Why are you interested in this position?",
+      TextInput.of("reason", TextInputStyle.PARAGRAPH)
+    ),
+    Label.of(
+      "What's 1+1?",
+      TextInput.of("math", TextInputStyle.SHORT)
+    )
+  );
+
+// Link the interactable modal with the actual modal
+interactableModal.useModal(modalBuilder);
+
+// Reply to the slash command event
+slashEvent.replyModal(modalBuilder.build())
+  .queue(interactableModal.registerOnCompleted());
+```
+
+<video src="jda-interactables-modal.mp4" preview-src="jda-interactables-modal.png"/>

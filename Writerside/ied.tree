@@ -19,7 +19,9 @@
         <toc-element topic="Ganyu.md"/>
         <toc-element topic="Amber.md"/>
         <toc-element topic="Irminsul.md"/>
-        <toc-element topic="JDA-Interactables.md"/>
+        <toc-element topic="JDA-Interactables.md">
+            <toc-element topic="JDA-Interactables-110.md"/>
+        </toc-element>
         <toc-element toc-title="Old / Misc">
             <toc-element topic="Console-Parallax.md"/>
             <toc-element toc-title="Mayu's JSON Utilities"/>
