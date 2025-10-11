@@ -79,7 +79,7 @@ class `Interactable` that contains ID, expiry duration, interaction rules and in
 Each interactable has a unique ID to identify it. Currently, it is used by `InteractableModal` to identify which
 modal was submitted. When you create buttons, select menus or other components, you don't need to set their IDs
 because they will be randomized anyway. If you have to set an ID (for example, within a builder), just set it to
-some kind of placeholder.
+some kind of a placeholder or random ID.
 
 ### Expiry duration
 
@@ -87,11 +87,11 @@ All interactables are designed to be temporary. The default expiry duration is 5
 the `#setExpiryDuration()` method. Once the expiry duration is reached, the interactable will be removed
 from the internal registry and will no longer be usable.
 
-If you need, you can manually unregister any interactable by using the `InteractableListener#removeInteractable()`
+If you need to register the interactable manually, you may use the `InteractableListener#removeInteractable()`
 method.
 
 > Keep in mind that manually removing an interactable will not trigger the expiry callback and may lead to
-`ConcurrentModificationException` if you try to remove it while its being processed.
+`ConcurrentModificationException` if you try to remove it while its being processed in the current thread.
 
 Once an interactable expires, the expiry callback will be triggered. You may add an expiry callback by using the
 `#addExpiryCallback()` method. Useful for cleaning up messages that should no longer be visible to users.
@@ -112,11 +112,12 @@ please see the [Interaction denied callbacks](#interaction-denied-callbacks) sec
 
 ### Interaction denied callbacks
 
-Interactables support a callback that will be invoked upon denied interaction for user who has not passed any of the
+Interactables support a callback that will be invoked upon denied interaction for user who has not passed one of the
 interaction rules. You can add a callback by using the `#addInteractionDeniedCallback()` method.
 
 Within the callback, you are given an access to the `InteractionEventContext` that holds the interaction event
-causing the interaction (such as `ButtonInteractionEvent` or `SelectMenuInteractionEvent`). Using the helper methods,
+causing the interaction (such as `ButtonInteractionEvent`, `SelectMenuInteractionEvent`, etc.). Using the helper
+methods,
 you may get the user, member, guild or event itself. It is recommended to process these denied callbacks to let
 the user know why their interaction was denied and why the application is not responding.
 
@@ -129,7 +130,7 @@ or embed(s).
 
 You may create an interactable components for a message using the `InteractableMessage` class. This class allows you to
 create buttons, select menus and other components that can be interacted with using the `#addInteraction()` method. This
-method takes an `Interaction` and a callback that will be invoked when the interaction is used.
+method takes an `Interaction` and a callback that will be invoked when the component is used.
 
 ```java
 InteractableMessage msg = new InteractableMessage();
@@ -146,7 +147,8 @@ Button doSomethingButton = interactableMessage.addInteraction(
 As you can see in the code above, the `Interaction.asButton()` method is used to create a button interaction with
 specified button parameters. The callback is a lambda that has the `ButtonInteractionEvent` as its parameter. The
 callback also returns a `Result` that determines whether the interaction should be removed or not. If you want to keep
-the interaction, return `Result.KEEP`. If you want to remove the interaction after it is used, return `Result.REMOVE`.
+the interaction, return `Result.KEEP`. If you want to remove the interaction, return `Result.REMOVE`. Not removing
+the interaction will eventually lead to the interactable expiring.
 
 <note>
 You may also use specify two-parameter callback that provides the <code>InteractableMessage</code> itself, along with the event.
@@ -246,6 +248,12 @@ slashEvent.reply(message)
   .queue(interactableMessage.registerOnCompleted());
 ```
 
+<note>
+You may specify interactable select options in interactable string select menu. The select options will be
+processed first, before the entire select menu callback is invoked. See more information about
+<a href="#individual-select-options">interactable select options in the next section</a>.
+</note>
+
 <video src="jda-interactables-favorite-colors.mp4" preview-src="jda-interactables-favorite-colors.png"/>
 
 #### Individual Select Options
@@ -301,6 +309,12 @@ slashEvent.reply(message)
   .queue(interactableMessage.registerOnCompleted());
 ```
 
+<note>
+You may specify interactable select options in interactable string select menu. The select options will be
+processed first, before the entire select menu callback is invoked. See more information about
+<a href="#individual-select-options">interactable select options in the next section</a>.
+</note>
+
 <video src="jda-interactables-mood-select.mp4" preview-src="jda-interactables-mood-select.png"/>
 
 ### Entity Select Menu
@@ -346,8 +360,8 @@ slashEvent.reply(message)
 ## Modals
 
 You may create an interactable modal using the `InteractableModal` class. This class allows you to create modals that
-will trigger the callback when the modal is submitted. Contrary to [interactable messages](#interactable-message),
-modals can only have one callback that is specified in the constructor. You must also link the interactive modal with
+will trigger the callback when the modal is submitted. Contrary to the [interactable messages](#interactable-message),
+modals have only one callback that is specified in the constructor. You must also link the interactive modal with
 the actual modal in order for the submission to be processed. This will set a random ID to the modal.
 
 ```java
