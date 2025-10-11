@@ -3,17 +3,21 @@
 # JDA Interactables
 
 - <p>
-    JDA Interactables is a Java library that allows you to create interactable messages and modals with JDA.
+    <a href="https://github.com/iwakura-enterprises/jda-interactables">JDA Interactables</a> is a Java library that allows you to create interactable messages and modals with JDA.
   </p>
   <p>
-    It provides a simple way to create messages with interactable components such as buttons and select menus.
+    It provides a simple way to create messages with interactable components such as buttons and select menus. You may
+    also create interactable modals.
   </p>
   <p>
-    Using this library, you can forget about naming your buttons and creating specific listeners for them.
+    You can forget about clanky listener adapters, manual ID management and other boilerplate code. Just create an
+    interactable, add interactions and register it. The library will take care of the rest.
   </p>
-- <img src="https://github.com/iwakura-enterprises/jda-interactables/blob/main/jda-interactables-logo.png?raw=true" alt="JDA-Interactables logo" width="300" style="inline" border-effect="rounded"/>
+- <a href="https://github.com/iwakura-enterprises/jda-interactables"><img src="https://github.com/iwakura-enterprises/jda-interactables/blob/main/jda-interactables-logo.png?raw=true" alt="JDA-Interactables logo" width="300" style="inline" border-effect="rounded"/></a>
 
 {columns="2"}
+
+[See the MIT-licensed source code on GitHub.](https://github.com/iwakura-enterprises/jda-interactables)
 
 <warning>This is documentation for version 2.x.x. If you're looking for version 1.1.0, please see <a href="JDA-Interactables-110.md">the old JDA-Interactables docs page</a>.</warning>
 
