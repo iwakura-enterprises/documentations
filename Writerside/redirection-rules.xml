@@ -20,4 +20,8 @@
         <description>Created after removal of "Core" from Iwakura Enterprises Documentations</description>
         <accepts>Sigewine.html</accepts>
     </rule>
+    <rule id="62417b56">
+        <description>Created after removal of "AmiAmi API" from Iwakura Enterprises Docs</description>
+        <accepts>AmiAmi-API.html</accepts>
+    </rule>
 </rules>

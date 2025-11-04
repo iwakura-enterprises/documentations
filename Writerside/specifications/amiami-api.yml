@@ -1,0 +1,824 @@
+openapi: 3.0.3
+info:
+  title: AmiAmi API
+  description: |-
+    I have not found AmiAmi API documentation online, so I decided to make my own based on my findings.
+  termsOfService: http://swagger.io/terms/
+  contact:
+    email: mayuna@iwakura.enterprises
+  version: 1.0.0
+servers:
+  - url: https://api.amiami.com/api/v1.0
+    description: "The base API url for AmiAmi API"
+  - url: https://img.amiami.com
+    description: "The base URL for AmiAmi images; usually you can append the image path returned by the API to this URL to get the full image URL."
+components:
+  schemas:
+    ItemSearchResponse:
+      type: object
+      properties:
+        RSuccess:
+          type: boolean
+          example: true
+        RValue:
+          nullable: true
+          description: "Details about errors if RSuccess is false"
+        RMessage:
+          type: string
+          example: "OK"
+        search_result:
+          type: object
+          properties:
+            total_results:
+              type: integer
+              example: 32
+        items:
+          type: array
+          items:
+            type: object
+            properties:
+              gcode:
+                type: string
+                example: "CGD-9540"
+              gname:
+                type: string
+                example: "Touhou Plushie Series EX3 Cirno Deka Fumo Cirno (Single Shipment)"
+              thumb_url:
+                type: string
+                example: "/images/product/main/102/CGD-9540.jpg"
+              thumb_alt:
+                type: string
+                example: "CGD-9540.jpg"
+              thumb_title:
+                type: string
+                example: "Touhou Plushie Series EX3 Cirno Deka Fumo Cirno (Single Shipment)"
+              min_price:
+                type: integer
+                example: 29800
+              max_price:
+                type: integer
+                example: 29800
+              c_price_taxed:
+                type: integer
+                example: 29800
+              maker_name:
+                type: string
+                example: "Gift"
+              saleitem:
+                type: integer
+                example: 0
+              condition_flg:
+                type: integer
+                example: 0
+              list_preorder_available:
+                type: integer
+                example: 0
+              list_backorder_available:
+                type: integer
+                example: 0
+              list_store_bonus:
+                type: integer
+                example: 0
+              list_amiami_limited:
+                type: integer
+                example: 0
+              instock_flg:
+                type: integer
+                example: 0
+              order_closed_flg:
+                type: integer
+                example: 1
+              element_id:
+                nullable: true
+              salestatus:
+                type: string
+                example: "Sold out"
+              salestatus_detail:
+                nullable: true
+              releasedate:
+                nullable: true
+              jancode:
+                nullable: true
+              preorderitem:
+                type: integer
+                example: 0
+              saletopitem:
+                type: integer
+                example: 0
+              resale_flg:
+                type: integer
+                example: 1
+              preowned_sale_flg:
+                type: integer
+                example: 0
+              for_women_flg:
+                type: integer
+                example: 0
+              genre_moe:
+                type: integer
+                example: 1
+              cate6:
+                nullable: true
+              cate7:
+                nullable: true
+              buy_flg:
+                type: integer
+                example: 0
+              buy_price:
+                type: integer
+                example: 0
+              buy_remarks:
+                nullable: true
+              stock_flg:
+                type: integer
+                example: 1
+              image_on:
+                type: integer
+                example: 1
+              image_category:
+                type: string
+                example: "102/"
+              image_name:
+                type: string
+                example: "CGD-9540"
+              metaalt:
+                nullable: true
+        _embedded:
+          type: object
+          properties:
+            category_tags:
+              type: array
+              items:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    example: 10
+                  name:
+                    type: string
+                    example: "Character Goods"
+                  count:
+                    type: integer
+                    example: 24
+            makers:
+              nullable: true
+            series_titles:
+              nullable: true
+            original_titles:
+              nullable: true
+            character_names:
+              nullable: true
+            elements:
+              nullable: true
+    ErrorResponse:
+      type: object
+      properties:
+        RSuccess:
+          type: boolean
+          example: false
+        RValue:
+          type: object
+          properties:
+            Error:
+              type: array
+              items:
+                type: object
+                properties:
+                  RequiredParameter:
+                    type: string
+                    example: "pagemax"
+                  ErrorMessage:
+                    type: string
+                    example: "pagemax is required."
+                  ErrorCode:
+                    type: string
+                    example: "10000"
+                  Fields:
+                    type: array
+                    items:
+                      type: string
+                    example: ["pagemax"]
+        RMessage:
+          type: string
+          example: "Invalid Request pagemax is required."
+    ItemDetailsResponse:
+      type: object
+      properties:
+        RSuccess:
+          type: boolean
+          example: true
+        RValue:
+          nullable: true
+        RMessage:
+          type: string
+          example: "OK"
+        item:
+          type: object
+          properties:
+            gcode:
+              type: string
+              example: "GOODS-04499125"
+            scode:
+              type: string
+              example: "GOODS-04499125"
+            gname:
+              type: string
+              example: "Touhou Project Plush Series Aya Shameimaru FumoFumo Aya. (Medium Size)"
+            sname:
+              type: string
+              example: "Touhou Project Plush Series Aya Shameimaru FumoFumo Aya. (Medium Size)(Released)"
+            gname_sub:
+              type: string
+            sname_simple:
+              type: string
+              example: "Touhou Project Plush Series Aya Shameimaru FumoFumo Aya. (Medium Size)"
+            sname_simple_j:
+              type: string
+              example: "東方Project ぬいぐるみシリーズ 射命丸文 ふもふもあや。(まんなかさいず)"
+            main_image_url:
+              type: string
+              example: "/images/product/main/244/GOODS-04499125.jpg"
+            main_image_alt:
+              type: string
+              example: "GOODS-04499125.jpg"
+            main_image_title:
+              type: string
+              example: "Touhou Project Plush Series Aya Shameimaru FumoFumo Aya. (Medium Size) [Gift]"
+            image_comment:
+              type: string
+              example: "*Actual product may differ from photos. <br />"
+            youtube:
+              nullable: true
+            list_price:
+              type: integer
+              example: 16000
+            c_price_taxed:
+              type: integer
+              example: 17600
+            price:
+              type: integer
+              example: 17600
+            point:
+              type: integer
+              example: 176
+            salestatus:
+              type: string
+              example: "Released"
+            releasedate:
+              type: string
+              example: "Jun-2025"
+            period_from:
+              nullable: true
+            period_to:
+              nullable: true
+            cart_type:
+              type: integer
+              example: 4
+            max_cartin_count:
+              type: integer
+              example: 3
+            include_instock_only_flg:
+              type: integer
+              example: 0
+            remarks:
+              type: string
+              example: "*This product cannot be shipped to the following area: Japan"
+            size_info:
+              nullable: true
+            watch_list_available:
+              type: integer
+              example: 1
+            jancode:
+              type: string
+              example: "4580731042914"
+            maker_name:
+              type: string
+              example: "Gift"
+            modeler:
+              type: string
+            modelergroup:
+              type: string
+            spec:
+              type: string
+              example: "Size: Approx. H40cm (in sitting pose)"
+            memo:
+              type: string
+            copyright:
+              type: string
+              example: "上海アリス幻樂団"
+            saleitem:
+              type: integer
+              example: 0
+            condition_flg:
+              type: integer
+              example: 0
+            preorderitem:
+              type: integer
+              example: 0
+            backorderitem:
+              type: integer
+              example: 0
+            store_bonus:
+              type: integer
+              example: 0
+            amiami_limited:
+              type: integer
+              example: 0
+            instock_flg:
+              type: integer
+              example: 0
+            order_closed_flg:
+              type: integer
+              example: 0
+            preown_attention:
+              type: integer
+              example: 0
+            producttypeattention:
+              type: integer
+              example: 0
+            agelimit:
+              type: integer
+              example: 0
+            customs_warning_flg:
+              type: integer
+              example: 0
+            preorderattention:
+              type: string
+            preorder_bonus_flg:
+              type: integer
+              example: 0
+            domesticitem:
+              type: integer
+              example: 0
+            metadescription:
+              type: string
+            metawords:
+              type: string
+            releasechange_text:
+              type: string
+            cate1:
+              type: array
+              items:
+                type: integer
+              example: [ 168 ]
+            cate2:
+              type: array
+              items:
+                type: integer
+              example: [ 1299 ]
+            cate3:
+              type: array
+              items:
+                type: integer
+              example: [ 10118 ]
+            cate4:
+              nullable: true
+            cate5:
+              nullable: true
+            cate6:
+              nullable: true
+            cate7:
+              nullable: true
+            salestalk:
+              type: string
+            buy_flg:
+              type: integer
+              example: 0
+            buy_price:
+              type: integer
+              example: 0
+            buy_remarks:
+              nullable: true
+            end_flg:
+              type: integer
+              example: 0
+            disp_flg:
+              type: integer
+              example: 0
+            onsale_flg:
+              type: integer
+              example: 1
+            handling_store:
+              nullable: true
+            salestatus_detail:
+              type: string
+            stock:
+              type: integer
+              example: 0
+            newitem:
+              type: integer
+              example: 1
+            saletopitem:
+              type: integer
+              example: 0
+            resale_flg:
+              type: integer
+              example: 0
+            preowned_sale_flg:
+              type: integer
+              example: 0
+            big_title_flg:
+              type: integer
+              example: 0
+            soldout_flg:
+              type: integer
+              example: 1
+            inc_txt1:
+              type: integer
+              example: 0
+            inc_txt2:
+              type: integer
+              example: 34
+            inc_txt3:
+              type: integer
+              example: 18
+            inc_txt4:
+              type: integer
+              example: 34
+            inc_txt5:
+              type: integer
+              example: 0
+            inc_txt6:
+              type: integer
+              example: 0
+            inc_txt7:
+              type: integer
+              example: 0
+            inc_txt8:
+              type: integer
+              example: 0
+            inc_txt9:
+              type: integer
+              example: 0
+            inc_txt10:
+              type: integer
+              example: 0
+            image_on:
+              type: integer
+              example: 1
+            image_category:
+              type: string
+              example: "244/"
+            image_name:
+              type: string
+              example: "GOODS-04499125"
+            metaalt:
+              type: string
+            image_reviewnumber:
+              type: integer
+              example: 2
+            image_reviewcategory:
+              type: string
+              example: "244/"
+            price1:
+              type: integer
+              example: 17600
+            price2:
+              type: integer
+              example: 0
+            price3:
+              type: integer
+              example: 0
+            price4:
+              type: integer
+              example: 0
+            price5:
+              type: integer
+              example: 17600
+            discountrate1:
+              type: integer
+              example: 0
+            discountrate2:
+              type: integer
+              example: 0
+            discountrate3:
+              type: integer
+              example: 0
+            discountrate4:
+              type: integer
+              example: 0
+            discountrate5:
+              type: integer
+              example: 0
+            sizew:
+              type: string
+              example: "<div class=\"icon_stock\"></div>"
+            colorw:
+              type: string
+              example: "<font style=\"color:red;font-weight:bold;\">17,600JPY</font>"
+            thumb_url:
+              type: string
+              example: "/images/product/thumb300/244/GOODS-04499125.jpg"
+            thumb_alt:
+              type: string
+              example: "GOODS-04499125.jpg"
+            thumb_title:
+              type: string
+              example: "Touhou Project Plush Series Aya Shameimaru FumoFumo Aya. (Medium Size)"
+            thumb_agelimit:
+              type: integer
+              example: 0
+        _embedded:
+          type: object
+          properties:
+            review_images:
+              type: array
+              items:
+                type: object
+                properties:
+                  image_url:
+                    type: string
+                    example: "/images/product/review/244/GOODS-04499125_01.jpg"
+                  thumb_url:
+                    type: string
+                    example: "/images/product/rthumb/244/GOODS-04499125_01.jpg"
+                  alt:
+                    type: string
+                    example: "GOODS-04499125_01.jpg"
+                  title:
+                    type: string
+                    example: "Touhou Project Plush Series Aya Shameimaru FumoFumo Aya. (Medium Size)[Gift]"
+            bonus_images:
+              type: array
+              items:
+                type: object
+            related_items:
+              type: array
+              items:
+                type: object
+                properties:
+                  gcode:
+                    type: string
+                    example: "GOODS-04499117"
+                  gname:
+                    type: string
+                    example: "[Bonus] Touhou Plush Series 84 Hecatia Lapislazuli FumoFumo Hecatia."
+                  thumb_url:
+                    type: string
+                    example: "/images/product/thumb300/244/GOODS-04499117.jpg"
+                  thumb_alt:
+                    type: string
+                    example: "GOODS-04499117.jpg"
+                  thumb_title:
+                    type: string
+                    example: "[Bonus] Touhou Plush Series 84 Hecatia Lapislazuli FumoFumo Hecatia."
+                  thumb_agelimit:
+                    type: integer
+                    example: 0
+            other_items:
+              type: array
+              items:
+                type: object
+            makers:
+              type: array
+              items:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    example: 97
+                  name:
+                    type: string
+                    example: "Gift"
+            series_titles:
+              type: array
+              items:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    example: 9619
+                  name:
+                    type: string
+                    example: "FumoFumo Series"
+            original_titles:
+              description: Labeled as "Series Title"
+              type: array
+              items:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    example: 211
+                  name:
+                    type: string
+                    example: "Touhou Project"
+            character_names:
+              type: array
+              items:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    example: 4613
+                  name:
+                    type: string
+                    example: "Aya Shameimaru"
+    ItemDetailsUnknownGCodeResponse:
+      type: object
+      properties:
+        RSuccess:
+          type: boolean
+          example: false
+        RValue:
+          type: object
+          properties:
+            Error:
+              type: array
+              items:
+                type: object
+                properties:
+                  RequiredParameter:
+                    type: string
+                    example: ""
+                  ErrorMessage:
+                    type: string
+                    example: "21"
+                  ErrorCode:
+                    type: string
+                    example: "error_code_21"
+                  Fields:
+                    type: array
+                    items:
+                      type: string
+                    example: []
+        RMessage:
+          type: string
+          example: "Invalid Request 21 "
+
+
+paths:
+  /items:
+    get:
+      description: "Searches thru AmiAmi's item database. Prices are in JPY!"
+      parameters:
+        - name: pagemax
+          in: query
+          description: "Number of items per page"
+          required: true
+          schema:
+            type: string
+          example: "50"
+        - name: lang
+          in: query
+          description: "Language"
+          required: false
+          schema:
+            type: string
+          example: "eng"
+        - name: s_keywords
+          in: query
+          description: "Search keywords. Not required for getting all items."
+          required: false
+          schema:
+            type: string
+          example: "cirno fumo"
+        - name: s_st_list_preorder_available
+          in: query
+          description: "Filter by pre-order availability"
+          required: false
+          schema:
+            type: string
+          example: "1"
+        - name: s_st_list_backorder_available
+          in: query
+          description: "Filter by back-order availability"
+          required: false
+          schema:
+              type: string
+          example: "1"
+        - name: s_st_list_newitem_available
+          in: query
+          description: "Filter by new availability"
+          required: false
+          schema:
+              type: string
+          example: "1"
+        - name: s_st_condition_flg
+          in: query
+          description: "Filter by pre-owned availability"
+          required: false
+          schema:
+              type: string
+          example: "1"
+        - name: s_st_list_store_bonus
+          in: query
+          description: "Filter by w/AmiAmi Bonus"
+          required: false
+          schema:
+            type: string
+          example: "1"
+        - name: s_st_saleitem
+          in: query
+          description: "Filter by sale items"
+          required: false
+          schema:
+            type: string
+          example: "1"
+        - name: s_originaltitle_id
+          in: query
+          description: "Filter by original title ID, e.g. show name or game name (or more exactly, their ID)"
+          required: false
+          schema:
+            type: string
+          example: "37847"
+        - name: s_cate1
+          in: query
+          description: "Filter by category ID (1st level)"
+          required: false
+          schema:
+            type: string
+          example: "398"
+        - name: s_cate2
+          in: query
+          description: "Filter by category ID (2nd level)"
+          required: false
+          schema:
+            type: string
+          example: "398"
+        - name: s_cate3
+          in: query
+          description: "Filter by category ID (3rd level)"
+          required: false
+          schema:
+            type: string
+          example: "918"
+        - name: s_cate4
+          in: query
+          description: "Filter by category ID (4th level)"
+          required: false
+          schema:
+            type: string
+          example: "9688"
+        - name: s_cate_tag
+          in: query
+          description: "Filter by category tag ID"
+          required: false
+          schema:
+            type: string
+          example: "10"
+        - name: s_charaname_search_id
+          in: query
+          description: "Filter by character name ID"
+          required: false
+          schema:
+            type: string
+          example: "4613"
+        - name: s_originaltitle_id
+          in: query
+          description: "Filter by series title ID"
+          required: false
+          schema:
+            type: string
+          example: "9619"
+        - name: s_maker_id
+          in: query
+          description: "Filter by brand ID"
+          required: false
+          schema:
+            type: string
+          example: "97"
+      responses:
+        "200":
+          description: "Successful response for item search"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ItemSearchResponse'
+        "400":
+          description: "Bad request - missing required parameters"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /item:
+    get:
+      description: "Get detailed information about a specific item using its gcode. Prices are in JPY!"
+      parameters:
+        - name: gcode
+          in: query
+          description: "The gcode of the item to retrieve details for"
+          required: true
+          schema:
+            type: string
+          example: "CGD-9540"
+        - name: lang
+          in: query
+          description: "Language"
+          required: false
+          schema:
+            type: string
+          example: "eng"
+      responses:
+        "200":
+          description: "Successful response for item details"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ItemDetailsResponse'
+        "400":
+          description: "Bad request - unknown/invalid gcode"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ItemDetailsUnknownGCodeResponse'
