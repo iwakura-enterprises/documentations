@@ -585,4 +585,4 @@ Here are extracted categories from their static page.
 
 I don't see any list of character names in their API. So I guess I will find some my favorite characters and list them here later.
 
-<api-doc openapi-path="../../specifications/amiami-api.yml"/>
+<api-doc openapi-path="../specifications/amiami-api.yml"/>
