@@ -1,3 +1,5 @@
+<show-structure depth="2"/>
+
 # AmiAmi API Reference
 
 I have not found AmiAmi API documentation online, so I decided to make my own based on my findings.
@@ -6,18 +8,436 @@ I have not found AmiAmi API documentation online, so I decided to make my own ba
 This may be incomplete and/or inaccurate. Use at your own risk!
 </warning>
 
-## URLs
+## Servers
 
-| URL                               | Description                                                                                                                      |
-|-----------------------------------|----------------------------------------------------------------------------------------------------------------------------------|
-| `https://api.amiami.com/api/v1.0` | Base URL for AmiAmi API                                                                                                          |
-| `https://img.amiami.com`          | The base URL for AmiAmi images; usually you can append the image path returned by the API to this URL to get the full image URL. |
+- `https://api.amiami.com/api/v1.0` - The base API url for AmiAmi API
+- `https://img.amiami.com` - The base URL for AmiAmi images; usually you can append the image path returned by the API
+  to this URL to get the full image URL.
 
-## Error Codes
+## Endpoints
 
-| Code | Description         |
-|------|---------------------|
-| `21` | Unknown scode/gcode |
+By default, all responses from AmiAmi are compressed using gzip; make sure your HTTP client can handle gzip-compressed responses.
+
+Furthermore, you should include header `x-user-key: amiami_dev` in your requests to authenticate with the API. Otherwise,
+you will get either a cloudflare error page or a 400 Bad Request response with ErrorMessage `Invalid access.` Other than
+that, you don't have to include any other headers. Cloudflare should let you pass.
+
+### GET `/items`
+
+Searches thru AmiAmi's item database. Prices are in JPY!
+
+#### Parameters {id="parameters__items"}
+
+| Name                            | In    | Description                                                                          | Required | Example      |
+|---------------------------------|-------|--------------------------------------------------------------------------------------|----------|--------------|
+| `pagemax`                       | query | Number of items per page (min 0, max 50)                                             | Yes      | `50`         |
+| `lang`                          | query | Language                                                                             | No       | `eng`, `cn`  |
+| `s_keywords`                    | query | Search keywords. Not required for getting all items.                                 | No       | `cirno fumo` |
+| `s_st_list_preorder_available`  | query | Filter by pre-order availability                                                     | No       | `1`          |
+| `s_st_list_backorder_available` | query | Filter by back-order availability                                                    | No       | `1`          |
+| `s_st_list_newitem_available`   | query | Filter by new availability                                                           | No       | `1`          |
+| `s_st_condition_flg`            | query | Filter by pre-owned availability                                                     | No       | `1`          |
+| `s_st_list_store_bonus`         | query | Filter by w/AmiAmi Bonus                                                             | No       | `1`          |
+| `s_st_saleitem`                 | query | Filter by sale items                                                                 | No       | `1`          |
+| `s_originaltitle_id`            | query | Filter by original title ID, e.g. show name or game name (or more exactly, their ID) | No       | `37847`      |
+| `s_cate1`                       | query | Filter by category ID (1st level)                                                    | No       | `398`        |
+| `s_cate2`                       | query | Filter by category ID (2nd level)                                                    | No       | `398`        |
+| `s_cate3`                       | query | Filter by category ID (3rd level)                                                    | No       | `918`        |
+| `s_cate4`                       | query | Filter by category ID (4th level)                                                    | No       | `9688`       |
+| `s_cate_tag`                    | query | Filter by category tag ID                                                            | No       | `10`         |
+| `s_charaname_search_id`         | query | Filter by character name ID                                                          | No       | `4613`       |
+| `s_maker_id`                    | query | Filter by brand ID                                                                   | No       | `97`         |
+| `s_seriestitle_id`              | query | Filter by series title ID                                                            | No       | `9619`       |
+| `s_originaltitle_id`            | query | Filter by original title ID                                                          | No       | `211`        |
+| `s_sortkey`                     | query | Sorts by specified key (see [table below](#sort-keys) for values)                    | No       | `regtimed`   |
+
+You may combine multiple filters to narrow down your search results.
+
+##### Sort keys
+
+| Sort Key       | Description                               |
+|----------------|-------------------------------------------|
+| `regtimed`     | Recently Updated Items                    |
+| `recommend`    | Shop Recommendation (whatever that means) |
+| `releasedated` | Latest Release Date                       |
+
+<tabs>
+<tab title="200 OK">
+
+Successful response for item search.
+
+```json
+{
+   "RSuccess":true,
+   "RValue":null,
+   "RMessage":"OK",
+   "search_result":{
+      "total_results":43
+   },
+   "items":[
+      {
+         "gcode":"GOODS-04700694",
+         "gname":"[Bonus] Touhou Plush Series 103 Clownpiece FumoFumo Piece.",
+         "thumb_url":"/images/product/main/254/GOODS-04700694.jpg",
+         "thumb_alt":"GOODS-04700694.jpg",
+         "thumb_title":"[Bonus] Touhou Plush Series 103 Clownpiece FumoFumo Piece.",
+         "min_price":6600,
+         "max_price":6600,
+         "c_price_taxed":6600,
+         "maker_name":"Gift",
+         "saleitem":0,
+         "condition_flg":0,
+         "list_preorder_available":1,
+         "list_backorder_available":0,
+         "list_store_bonus":0,
+         "list_amiami_limited":0,
+         "instock_flg":0,
+         "order_closed_flg":0,
+         "element_id":null,
+         "salestatus":null,
+         "salestatus_detail":null,
+         "releasedate":"2026-06-30 00:00:00",
+         "jancode":"4580731044420",
+         "preorderitem":1,
+         "saletopitem":0,
+         "resale_flg":0,
+         "preowned_sale_flg":0,
+         "for_women_flg":0,
+         "genre_moe":1,
+         "cate6":null,
+         "cate7":null,
+         "buy_flg":0,
+         "buy_price":0,
+         "buy_remarks":null,
+         "stock_flg":1,
+         "image_on":1,
+         "image_category":"254/",
+         "image_name":"GOODS-04700694",
+         "metaalt":null
+      }
+   ],
+   "_embedded":{
+      "category_tags":[
+         {
+            "id":10,
+            "name":"Character Goods",
+            "count":42
+         },
+         {
+            "id":12,
+            "name":"Toys",
+            "count":24
+         },
+         {
+            "id":37,
+            "name":"Plush Dolls",
+            "count":24
+         },
+         {
+            "id":42,
+            "name":"Fashion",
+            "count":1
+         },
+         {
+            "id":43,
+            "name":"Men\u0027s Fashion",
+            "count":1
+         },
+         {
+            "id":44,
+            "name":"Ladies\u0027 Fashion",
+            "count":1
+         }
+      ],
+      "makers":null,
+      "series_titles":null,
+      "original_titles":null,
+      "character_names":null,
+      "elements":null
+   }
+}
+```
+
+</tab>
+
+<tab title="400 Bad Request">
+
+Bad request - missing required parameters or invalid values.
+
+```json
+{
+    "RSuccess": false,
+    "RValue": {
+        "Error": [
+            {
+                "RequiredParameter": "pagemax",
+                "ErrorMessage": "Please enter pagemax in [0] or [50] below.",
+                "ErrorCode": "10022",
+                "Fields": [
+                    "pagemax"
+                ]
+            }
+        ]
+    },
+    "RMessage": "Invalid Request\r\nPlease enter pagemax in [0] or [50] below.\r\n"
+}
+```
+
+</tab>
+</tabs>
+
+### GET `/item`
+
+Get detailed information about a specific item using its gcode. Prices are in JPY!
+
+#### Parameters
+
+| Name    | In    | Description                                   | Required | Example    |
+|---------|-------|-----------------------------------------------|----------|------------|
+| `gcode` | query | The gcode of the item to retrieve details for | Yes      | `CGD-9540` |
+| `lang`  | query | Language                                      | No       | `eng`      |
+
+<tabs>
+<tab title="200 OK">
+
+Successful response for item details.
+
+```json
+{
+   "RSuccess":true,
+   "RValue":null,
+   "RMessage":"OK",
+   "item":{
+      "gcode":"GOODS-04700693",
+      "scode":"GOODS-04700693",
+      "gname":"[Bonus] Touhou Plush Series 102 Koakuma FumoFumo Koakuma.",
+      "sname":"[Bonus] Touhou Plush Series 102 Koakuma FumoFumo Koakuma.(Pre-order)",
+      "gname_sub":"",
+      "sname_simple":"[Bonus] Touhou Plush Series 102 Koakuma FumoFumo Koakuma.",
+      "sname_simple_j":"【特典】東方ぬいぐるみシリーズ 102 小悪魔 ふもふもこあくま。",
+      "main_image_url":"/images/product/main/254/GOODS-04700693.jpg",
+      "main_image_alt":"GOODS-04700693.jpg",
+      "main_image_title":"[Bonus] Touhou Plush Series 102 Koakuma FumoFumo Koakuma. [Gift]",
+      "image_comment":"*Actual product may differ from photos. \u003Cbr /\u003E",
+      "youtube":null,
+      "list_price":6000,
+      "c_price_taxed":6600,
+      "price":6600,
+      "point":66,
+      "salestatus":"Pre-order",
+      "releasedate":"Jun-2026",
+      "period_from":null,
+      "period_to":"2025-11-25T14:59:00.000Z",
+      "cart_type":8,
+      "max_cartin_count":3,
+      "include_instock_only_flg":0,
+      "remarks":"*This is the same product that was sold at 12th Shuuki Reitaisai Plush Maker Gift Booth.\n*This product cannot be shipped to the following area: Japan",
+      "size_info":null,
+      "watch_list_available":1,
+      "jancode":"4580731044970",
+      "maker_name":"Gift",
+      "modeler":"",
+      "modelergroup":"",
+      "spec":"Size: Approx. H20cm\n\n[Set Contents]\nTouhou Plush Series 102 Koakuma FumoFumo Koakuma.\n[Gift Limited Purchase Bonus]\nTin badge Koakuma",
+      "memo":"",
+      "copyright":"",
+      "saleitem":0,
+      "condition_flg":0,
+      "preorderitem":1,
+      "backorderitem":0,
+      "store_bonus":0,
+      "amiami_limited":0,
+      "instock_flg":1,
+      "order_closed_flg":0,
+      "preown_attention":0,
+      "producttypeattention":0,
+      "agelimit":0,
+      "customs_warning_flg":0,
+      "preorderattention":"",
+      "preorder_bonus_flg":0,
+      "domesticitem":0,
+      "metadescription":"",
+      "metawords":"",
+      "releasechange_text":"",
+      "cate1":[
+         168
+      ],
+      "cate2":[
+         1299
+      ],
+      "cate3":[
+         10118
+      ],
+      "cate4":null,
+      "cate5":null,
+      "cate6":null,
+      "cate7":null,
+      "salestalk":"",
+      "buy_flg":0,
+      "buy_price":0,
+      "buy_remarks":null,
+      "end_flg":0,
+      "disp_flg":0,
+      "onsale_flg":1,
+      "handling_store":null,
+      "salestatus_detail":"",
+      "stock":1,
+      "newitem":0,
+      "saletopitem":0,
+      "resale_flg":0,
+      "preowned_sale_flg":0,
+      "big_title_flg":0,
+      "soldout_flg":1,
+      "inc_txt1":0,
+      "inc_txt2":34,
+      "inc_txt3":18,
+      "inc_txt4":34,
+      "inc_txt5":0,
+      "inc_txt6":0,
+      "inc_txt7":0,
+      "inc_txt8":0,
+      "inc_txt9":0,
+      "inc_txt10":0,
+      "image_on":1,
+      "image_category":"254/",
+      "image_name":"GOODS-04700693",
+      "metaalt":"",
+      "image_reviewnumber":1,
+      "image_reviewcategory":"254/",
+      "price1":6600,
+      "price2":0,
+      "price3":0,
+      "price4":0,
+      "price5":6600,
+      "discountrate1":0,
+      "discountrate2":0,
+      "discountrate3":0,
+      "discountrate4":0,
+      "discountrate5":0,
+      "sizew":"\u003Cdiv class=\u0022icon_preorder\u0022\u003E\u003C/div\u003E",
+      "colorw":"\u003Cfont style=\u0022color:red;font-weight:bold;\u0022\u003E6,600JPY\u003C/font\u003E",
+      "thumb_url":"/images/product/thumb300/254/GOODS-04700693.jpg",
+      "thumb_alt":"GOODS-04700693.jpg",
+      "thumb_title":"[Bonus] Touhou Plush Series 102 Koakuma FumoFumo Koakuma.",
+      "thumb_agelimit":0
+   },
+   "_embedded":{
+      "review_images":[
+         {
+            "image_url":"/images/product/review/254/GOODS-04700693_01.jpg",
+            "thumb_url":"/images/product/rthumb/254/GOODS-04700693_01.jpg",
+            "alt":"GOODS-04700693_01.jpg",
+            "title":"[Bonus] Touhou Plush Series 102 Koakuma FumoFumo Koakuma.[Gift]"
+         }
+      ],
+      "bonus_images":[
+         
+      ],
+      "related_items":[
+         {
+            "gcode":"GOODS-04700694",
+            "gname":"[Bonus] Touhou Plush Series 103 Clownpiece FumoFumo Piece.",
+            "thumb_url":"/images/product/thumb300/254/GOODS-04700694.jpg",
+            "thumb_alt":"GOODS-04700694.jpg",
+            "thumb_title":"[Bonus] Touhou Plush Series 103 Clownpiece FumoFumo Piece.",
+            "thumb_agelimit":0
+         },
+         {
+            "gcode":"GOODS-04700695",
+            "gname":"[Bonus] Touhou Plush Series 104 Tsukasa Kudamaki FumoFumo Tsukasa.",
+            "thumb_url":"/images/product/thumb300/254/GOODS-04700695.jpg",
+            "thumb_alt":"GOODS-04700695.jpg",
+            "thumb_title":"[Bonus] Touhou Plush Series 104 Tsukasa Kudamaki FumoFumo Tsukasa.",
+            "thumb_agelimit":0
+         },
+         {
+            "gcode":"GOODS-04700696",
+            "gname":"[Bonus] Touhou Plush Series 105 Megumu Iizunamaru FumoFumo Megumu.",
+            "thumb_url":"/images/product/thumb300/254/GOODS-04700696.jpg",
+            "thumb_alt":"GOODS-04700696.jpg",
+            "thumb_title":"[Bonus] Touhou Plush Series 105 Megumu Iizunamaru FumoFumo Megumu.",
+            "thumb_agelimit":0
+         },
+         {
+            "gcode":"GOODS-04700690",
+            "gname":"[Bonus] Touhou Plush Series 98 Daiyousei FumoFumo Daiyousei.",
+            "thumb_url":"/images/product/thumb300/254/GOODS-04700690.jpg",
+            "thumb_alt":"GOODS-04700690.jpg",
+            "thumb_title":"[Bonus] Touhou Plush Series 98 Daiyousei FumoFumo Daiyousei.",
+            "thumb_agelimit":0
+         },
+         {
+            "gcode":"GOODS-04700691",
+            "gname":"[Bonus] Touhou Plush Series 100 Reimu Hakurei (Green ver.) FumoFumo Reimu. Phantasmagoria of Dim.Dream. Green Version.",
+            "thumb_url":"/images/product/thumb300/254/GOODS-04700691.jpg",
+            "thumb_alt":"GOODS-04700691.jpg",
+            "thumb_title":"[Bonus] Touhou Plush Series 100 Reimu Hakurei (Green ver.) FumoFumo Reimu. Phantasmagoria of Dim.Dream. Green Version.",
+            "thumb_agelimit":0
+         },
+         {
+            "gcode":"GOODS-04700692",
+            "gname":"[Bonus] Touhou Plush Series 101 Marisa Kirisame (White ver.) FumoFumo Marisa. Phantasmagoria of Dim.Dream. White Version.",
+            "thumb_url":"/images/product/thumb300/254/GOODS-04700692.jpg",
+            "thumb_alt":"GOODS-04700692.jpg",
+            "thumb_title":"[Bonus] Touhou Plush Series 101 Marisa Kirisame (White ver.) FumoFumo Marisa. Phantasmagoria of Dim.Dream. White Version.",
+            "thumb_agelimit":0
+         }
+      ],
+      "other_items":[
+         
+      ],
+      "makers":[
+         {
+            "id":97,
+            "name":"Gift"
+         }
+      ],
+      "series_titles":[
+         {
+            "id":9619,
+            "name":"FumoFumo Series"
+         },
+         {
+            "id":403,
+            "name":"Touhou Plush Series"
+         }
+      ],
+      "original_titles":[
+         {
+            "id":211,
+            "name":"Touhou Project"
+         }
+      ],
+      "character_names":null
+   }
+}
+```
+
+</tab>
+
+<tab title="400 Bad Request">
+
+Bad request - unknown/invalid gcode/scode .
+
+```json
+{
+   "RSuccess":false,
+   "RValue":{
+      "Error":[
+         {
+            "RequiredParameter":"",
+            "ErrorMessage":"21",
+            "ErrorCode":"error_code_21",
+            "Fields":[]
+         }
+      ]
+   },
+   "RMessage":"Invalid Request\r\n21\r\n"
+}
+```
+
+</tab>
+</tabs>
 
 ## Miscellaneous
 
@@ -81,7 +501,7 @@ They'll probably not change often. But it seems this is not these are not the ex
 ]
 ```
 
-## Extracted categories
+### Extracted categories
 
 Here are extracted categories from their static page.
 
@@ -583,6 +1003,5 @@ Here are extracted categories from their static page.
 
 ## Character Names
 
-I don't see any list of character names in their API. So I guess I will find some my favorite characters and list them here later.
-
-<api-doc openapi-path="../specifications/amiami-api.yml"/>
+I don't see any list of character names in their API. So I guess I will find some my favorite characters and list them
+here later.
