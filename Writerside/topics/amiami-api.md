@@ -28,28 +28,27 @@ Searches thru AmiAmi's item database. Prices are in JPY!
 
 #### Parameters {id="parameters__items"}
 
-| Name                            | In    | Description                                                                          | Required | Example      |
-|---------------------------------|-------|--------------------------------------------------------------------------------------|----------|--------------|
-| `pagemax`                       | query | Number of items per page (min 0, max 50)                                             | Yes      | `50`         |
-| `lang`                          | query | Language                                                                             | No       | `eng`, `cn`  |
-| `s_keywords`                    | query | Search keywords. Not required for getting all items.                                 | No       | `cirno fumo` |
-| `s_st_list_preorder_available`  | query | Filter by pre-order availability                                                     | No       | `1`          |
-| `s_st_list_backorder_available` | query | Filter by back-order availability                                                    | No       | `1`          |
-| `s_st_list_newitem_available`   | query | Filter by new availability                                                           | No       | `1`          |
-| `s_st_condition_flg`            | query | Filter by pre-owned availability                                                     | No       | `1`          |
-| `s_st_list_store_bonus`         | query | Filter by w/AmiAmi Bonus                                                             | No       | `1`          |
-| `s_st_saleitem`                 | query | Filter by sale items                                                                 | No       | `1`          |
-| `s_originaltitle_id`            | query | Filter by original title ID, e.g. show name or game name (or more exactly, their ID) | No       | `37847`      |
-| `s_cate1`                       | query | Filter by category ID (1st level)                                                    | No       | `398`        |
-| `s_cate2`                       | query | Filter by category ID (2nd level)                                                    | No       | `398`        |
-| `s_cate3`                       | query | Filter by category ID (3rd level)                                                    | No       | `918`        |
-| `s_cate4`                       | query | Filter by category ID (4th level)                                                    | No       | `9688`       |
-| `s_cate_tag`                    | query | Filter by category tag ID                                                            | No       | `10`         |
-| `s_charaname_search_id`         | query | Filter by character name ID                                                          | No       | `4613`       |
-| `s_maker_id`                    | query | Filter by brand ID                                                                   | No       | `97`         |
-| `s_seriestitle_id`              | query | Filter by series title ID                                                            | No       | `9619`       |
-| `s_originaltitle_id`            | query | Filter by original title ID                                                          | No       | `211`        |
-| `s_sortkey`                     | query | Sorts by specified key (see [table below](#sort-keys) for values)                    | No       | `regtimed`   |
+| Name                            | In    | Description                                                       | Required | Example      |
+|---------------------------------|-------|-------------------------------------------------------------------|----------|--------------|
+| `pagemax`                       | query | Number of items per page (min 0, max 50)                          | Yes      | `50`         |
+| `lang`                          | query | Language                                                          | No       | `eng`, `cn`  |
+| `s_keywords`                    | query | Search keywords. Not required for getting all items.              | No       | `cirno fumo` |
+| `s_st_list_preorder_available`  | query | Filter by pre-order availability                                  | No       | `1`          |
+| `s_st_list_backorder_available` | query | Filter by back-order availability                                 | No       | `1`          |
+| `s_st_list_newitem_available`   | query | Filter by new availability                                        | No       | `1`          |
+| `s_st_condition_flg`            | query | Filter by pre-owned availability                                  | No       | `1`          |
+| `s_st_list_store_bonus`         | query | Filter by w/AmiAmi Bonus                                          | No       | `1`          |
+| `s_st_saleitem`                 | query | Filter by sale items                                              | No       | `1`          |
+| `s_cate1`                       | query | Filter by category ID (1st level)                                 | No       | `398`        |
+| `s_cate2`                       | query | Filter by category ID (2nd level)                                 | No       | `398`        |
+| `s_cate3`                       | query | Filter by category ID (3rd level)                                 | No       | `918`        |
+| `s_cate4`                       | query | Filter by category ID (4th level)                                 | No       | `9688`       |
+| `s_cate_tag`                    | query | Filter by category tag ID                                         | No       | `10`         |
+| `s_charaname_search_id`         | query | Filter by character name ID                                       | No       | `4613`       |
+| `s_maker_id`                    | query | Filter by brand ID (e.g. SQUARE ENIX)                             | No       | `97`         |
+| `s_seriestitle_id`              | query | Filter by series title ID (e.g. Touhou Plush Series)              | No       | `9619`       |
+| `s_originaltitle_id`            | query | Filter by original title ID (e.g. Touhou Project)                 | No       | `211`        |
+| `s_sortkey`                     | query | Sorts by specified key (see [table below](#sort-keys) for values) | No       | `regtimed`   |
 
 You may combine multiple filters to narrow down your search results.
 
