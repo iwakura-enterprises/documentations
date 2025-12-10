@@ -20,6 +20,8 @@
 
 {columns="2"}
 
+[See the MIT-licensed source code on GitHub](https://github.com/iwakura-enterprises/amber), including the Gradle plugin.
+
 <procedure title="Quick example" id="quick_example" collapsible="true" default-state="expanded">
 
 Add Amber to your Gradle build script:
@@ -217,6 +219,19 @@ continue running after bootstrapping. Defaults to null.
 `exitMessageAfterDownload`
 : Specifies a message to be logged after the bootstrapping process is completed and before exiting, if
 `exitCodeAfterDownload` is not null. If set to null, no message will be logged. Defaults to null.
+
+`exitCallback`
+: An optional exit callback function that will be called with the list of all dependency paths before exiting (this includes even
+those that were downloaded in the past bootstraps. The supplied list is the same one as the one returned by the `Amber#bootstrap()`
+methods). If set, `exitCodeAfterDownload` and `exitMessageAfterDownload` will be
+ignored. A non-null return value from this function will be used as the exit code. If the return value will be null, the application will
+<b>not</b> exit. This function will not be invoked if no dependencies were downloaded.
+
+`progressHintCallback`
+: An optional callback that will receive progress hints during the bootstrap process.
+This includes updates for existing and currently downloading dependencies. Be aware that this callback may be invoked from multiple threads
+(see `downloaderThreadCount` for more information). Any exceptions thrown by this callback will be caught and logged,
+but will <b>not</b> affect the bootstrap process.
 
 `libraryDirectoryOverride`
 : Overrides the library directory specified in the MANIFEST.MF. If set to null, the library directory from the
