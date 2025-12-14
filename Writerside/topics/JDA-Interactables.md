@@ -10,7 +10,7 @@ interactable modals. You can forget about clanky listener adapters, manual ID ma
 Just create an interactable, add interactions and register it. The library will take care of the rest.
 
 [Source Code](https://github.com/iwakura-enterprises/jda-interactables) —
-[Documentation](https://docs.iwakura.enterprises/jda-interactables/) —
+[Documentation](https://docs.iwakura.enterprises/jda-interactables.html) —
 [Maven Central](https://central.sonatype.com/artifact/enterprises.iwakura/jda-interactables)
 
 <warning>This is documentation for version 2.x.x. If you're looking for version 1.1.0, please see <a href="JDA-Interactables-110.md">the old JDA-Interactables docs page</a>.</warning>
