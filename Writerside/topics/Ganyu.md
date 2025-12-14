@@ -9,7 +9,7 @@ commands and subcommands. Contrary to normal CLI libraries, Ganyu also provides 
 are similar to flags. All command definitions are done via annotations, making it super easy.
 
 [Source Code](https://github.com/iwakura-enterprises/ganyu) —
-[Documentation](https://docs.iwakura.enterprises/ganyu/) —
+[Documentation](https://docs.iwakura.enterprises/ganyu.html) —
 [Maven Central](https://central.sonatype.com/artifact/enterprises.iwakura/ganyu)
 
 ## Quick example

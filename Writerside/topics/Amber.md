@@ -12,7 +12,7 @@ property in <code>MANIFEST.MF</code>, JVM loads the dependencies just
 like if they were bundled with your jar.
 
 [Source Code](https://github.com/iwakura-enterprises/amber) —
-[Documentation](https://docs.iwakura.enterprises/amber/) —
+[Documentation](https://docs.iwakura.enterprises/amber.html) —
 [Maven Central](https://central.sonatype.com/artifact/enterprises.iwakura/amber-core) —
 [Gradle Plugin Portal](https://plugins.gradle.org/plugin/enterprises.iwakura.amber)
 

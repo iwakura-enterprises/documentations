@@ -10,8 +10,8 @@ should  not be viewed as definitive way to work with Hibernate ORM. I will proba
 that it provides.
 
 [Source Code](https://github.com/iwakura-enterprises/irminsul) —
-[Documentation](https://docs.iwakura.enterprises/irminsul/) —
-[Maven Central](https://central.sonatype.com/artifact/enterprises.iwakura/irminsul)
+[Documentation](https://docs.iwakura.enterprises/irminsul.html) —
+[Maven Central](https://central.sonatype.com/artifact/enterprises.iwakura/ganyu)
 
 ## Example
 
