@@ -2,28 +2,20 @@
 
 # Irminsul
 
-- <p>
-    Irminsul is a Java library wrapping Hibernate ORM.
-  </p>
-  <p>
-    This allows you to create applications on top of Hibernate
-    with less boilerplate code.
-  </p>
-  <p>
-    It is an opinionated library, fit to suit my needs - and maybe needs of other developers as well. It should
-    not be viewed as definitive way to work with Hibernate ORM. I will probably miss out a lot of the features
-    that it provides.
-  </p>
-  <p>
-    You may find all the documentation about Irminsul on this page.
-  </p>
-- <img src="https://github.com/iwakura-enterprises/irminsul/blob/main/irminsul-logo.png?raw=true" alt="Irminsul logo" width="300" style="inline" border-effect="rounded"/>
+<img src="https://akasha.iwakura.enterprises/data-source/hetzner/public/logo/irminsul.png" alt="Irminsul logo" width="300" border-effect="rounded"/>
 
-{columns="2"}
+Irminsul is a Java library wrapping Hibernate ORM. This allows you to create applications on top of Hibernate with less
+boilerplate code. It is an opinionated library, fit to suit my needs - and maybe needs of other developers as well. It
+should  not be viewed as definitive way to work with Hibernate ORM. I will probably miss out a lot of the features
+that it provides.
 
-> Opinionated Hibernate ORM wrapper for Java 17+
+[Source Code](https://github.com/iwakura-enterprises/irminsul) —
+[Documentation](https://docs.iwakura.enterprises/irminsul/) —
+[Maven Central](https://central.sonatype.com/artifact/enterprises.iwakura/irminsul)
 
-<procedure title="Example" id="example" collapsible="true" default-state="expanded">
+## Example
+
+<procedure>
 
 ```java
 // Load the database configuration

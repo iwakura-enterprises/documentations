@@ -1,5 +1,8 @@
 # Maven Versions
 
+This article is used to track the latest versions of my projects that are published on Maven Central or Gradle Plugin
+Portal. These badges are then used in other articles. They are all clickable... try clicking them!
+
 <table>
     <tr>
         <th>Project</th>

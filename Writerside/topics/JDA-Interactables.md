@@ -2,24 +2,55 @@
 
 # JDA Interactables
 
-- <p>
-    <a href="https://github.com/iwakura-enterprises/jda-interactables">JDA Interactables</a> is a Java library that allows you to create interactable messages and modals with JDA.
-  </p>
-  <p>
-    It provides a simple way to create messages with interactable components such as buttons and select menus. You may
-    also create interactable modals.
-  </p>
-  <p>
-    You can forget about clanky listener adapters, manual ID management and other boilerplate code. Just create an
-    interactable, add interactions and register it. The library will take care of the rest.
-  </p>
-- <a href="https://github.com/iwakura-enterprises/jda-interactables"><img src="https://github.com/iwakura-enterprises/jda-interactables/blob/main/jda-interactables-logo.png?raw=true" alt="JDA-Interactables logo" width="300" style="inline" border-effect="rounded"/></a>
+<img src="https://akasha.iwakura.enterprises/data-source/hetzner/public/logo/jda-interactables.png" alt="JDA Interactables logo" width="300" border-effect="rounded"/>
 
-{columns="2"}
+JDA Interactables is a Java library that allows you to create interactable messages and modals with JDA. It provides a
+simple way to create messages with interactable components such as buttons and select menus. You may also create
+interactable modals. You can forget about clanky listener adapters, manual ID management and other boilerplate code.
+Just create an interactable, add interactions and register it. The library will take care of the rest.
 
-[See the MIT-licensed source code on GitHub.](https://github.com/iwakura-enterprises/jda-interactables)
+[Source Code](https://github.com/iwakura-enterprises/jda-interactables) —
+[Documentation](https://docs.iwakura.enterprises/jda-interactables/) —
+[Maven Central](https://central.sonatype.com/artifact/enterprises.iwakura/jda-interactables)
 
 <warning>This is documentation for version 2.x.x. If you're looking for version 1.1.0, please see <a href="JDA-Interactables-110.md">the old JDA-Interactables docs page</a>.</warning>
+
+## Quick example
+
+<procedure>
+
+```java
+// Register the listener
+JDA jda = /* ... */;
+jda.addEventListener(new InteractableListener());
+
+// Example of handling a slash command event
+SlashCommandInteractionEvent event = /* ... */;
+InteractableMessage interactableMessage = new InteractableMessage();
+
+// Create interactable button
+Button doSomethingButton = interactableMessage.addInteraction(
+  Interaction.asButton(ButtonStyle.SUCCESS, "Do something!"),
+  (event) -> {
+    event.reply("Did something!").queue();
+    log.info("Did something!");
+    return Result.REMOVE;
+});
+
+// Create a message to be sent
+ActionRow actionRow = ActionRow.of(doSomethingButton);
+MessageCreateData message = new MessageCreateBuilder()
+    .addComponents(actionRow)
+    .build();
+
+// Reply to the slash command event
+slashEvent.reply(message)
+  // Upon successful sending, register the interactable
+  // so users can interact with it
+  .queue(interactableMessage.registerOnCompleted());
+```
+
+</procedure>
 
 ## Installation
 
@@ -75,7 +106,7 @@ may specify your own
 ## Usage - Interactables
 
 As of version 2.0.0, JDA Interactables are more flexible than ever. You can create interactables for both messages
-and modals, `InteractableMessage` and `InteractableModal` respectively. Both classes implement the base abstract
+and modals, using `InteractableMessage` and `InteractableModal` respectively. Both classes implement the base abstract
 class `Interactable` that contains ID, expiry duration, interaction rules and interaction denied callbacks.
 
 ### ID
@@ -191,7 +222,7 @@ slashEvent.reply(message)
   .queue(interactableMessage.registerOnCompleted());
 ```
 
-<img src="jda-interactables-do-something-button.png" alt="JDA Interactables Do Something Button" width="600" style="inline" border-effect="rounded"/>
+<img src="jda-interactables-do-something-button.png" alt="JDA Interactables Do Something Button" width="600" border-effect="rounded"/>
 
 Upon clicking the button, the callback will be invoked and the interaction will be processed, thus replying with "Did
 something!" and logging the message to the console.

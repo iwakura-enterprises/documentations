@@ -2,27 +2,23 @@
 
 # Amber
 
-- <p>
-    Amber is a Java library and Gradle plugin for managing and
-    downloading dependencies from repositories at runtime.
-  </p>
-  <p>
-    This offers you a unique way to lower your jar's size by offloading
-    dependencies to be downloaded by Amber when your application starts.
-  </p>
-  <p>
-    Using a <code>Class-Path</code> property in <code>MANIFEST.MF</code>, JVM loads the dependencies just like they were bundled with your jar.
-  </p>
-  <p>
-    You may find all the documentation about Amber on this page.
-  </p>
-- <img src="https://github.com/iwakura-enterprises/amber/blob/main/amber-logo.png?raw=true" alt="Amber logo" width="300" style="inline" border-effect="rounded"/>
+<img src="https://akasha.iwakura.enterprises/data-source/hetzner/public/logo/amber.png" alt="Amber logo" width="300" border-effect="rounded"/>
 
-{columns="2"}
+Amber is a Java library and Gradle plugin for managing and
+downloading dependencies from repositories at runtime. This offers you a
+unique way to lower your jar's size by offloading dependencies to
+be downloaded on application's start. Using a <code>Class-Path</code>
+property in <code>MANIFEST.MF</code>, JVM loads the dependencies just
+like if they were bundled with your jar.
 
-[See the MIT-licensed source code on GitHub](https://github.com/iwakura-enterprises/amber), including the Gradle plugin.
+[Source Code](https://github.com/iwakura-enterprises/amber) —
+[Documentation](https://docs.iwakura.enterprises/amber/) —
+[Maven Central](https://central.sonatype.com/artifact/enterprises.iwakura/amber-core) —
+[Gradle Plugin Portal](https://plugins.gradle.org/plugin/enterprises.iwakura.amber)
 
-<procedure title="Quick example" id="quick_example" collapsible="true" default-state="expanded">
+## Quick example
+
+<procedure>
 
 Add Amber to your Gradle build script:
 
@@ -30,7 +26,7 @@ Add Amber to your Gradle build script:
 plugins {
   id 'java'
   // Include the Amber plugin
-  id 'enterprises.iwakura.amber-plugin' version '1.0.0'
+  id 'enterprises.iwakura.amber' version '1.0.0'
 }
 
 dependencies {
@@ -81,13 +77,15 @@ You might need to click the version badge to see the latest version.
 
 ```groovy
 plugins {
-  id 'enterprises.iwakura.amber-plugin' version 'VERSION'
+  id 'enterprises.iwakura.amber' version 'VERSION'
 }
 
 dependencies {
   implementation 'enterprises.iwakura:amber-core:VERSION'
 }
 ```
+
+> There's no Maven plugin.
 
 ## Creating an Amber instance
 
@@ -221,15 +219,19 @@ continue running after bootstrapping. Defaults to null.
 `exitCodeAfterDownload` is not null. If set to null, no message will be logged. Defaults to null.
 
 `exitCallback`
-: An optional exit callback function that will be called with the list of all dependency paths before exiting (this includes even
-those that were downloaded in the past bootstraps. The supplied list is the same one as the one returned by the `Amber#bootstrap()`
+: An optional exit callback function that will be called with the list of all dependency paths before exiting (this
+includes even
+those that were downloaded in the past bootstraps. The supplied list is the same one as the one returned by the
+`Amber#bootstrap()`
 methods). If set, `exitCodeAfterDownload` and `exitMessageAfterDownload` will be
-ignored. A non-null return value from this function will be used as the exit code. If the return value will be null, the application will
+ignored. A non-null return value from this function will be used as the exit code. If the return value will be null, the
+application will
 <b>not</b> exit. This function will not be invoked if no dependencies were downloaded.
 
 `progressHintCallback`
 : An optional callback that will receive progress hints during the bootstrap process.
-This includes updates for existing and currently downloading dependencies. Be aware that this callback may be invoked from multiple threads
+This includes updates for existing and currently downloading dependencies. Be aware that this callback may be invoked
+from multiple threads
 (see `downloaderThreadCount` for more information). Any exceptions thrown by this callback will be caught and logged,
 but will <b>not</b> affect the bootstrap process.
 

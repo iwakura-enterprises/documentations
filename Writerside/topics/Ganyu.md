@@ -2,23 +2,19 @@
 
 # Ganyu
 
-- <p>
-    Ganyu is a Java library that allows you to create easy CLI.
-  </p>
-  <p>
-    It provides a toolset of annotations and classes to create commands and subcommands.
-  </p>
-  <p>
-    Contrary to normal CLI libraries, Ganyu also provides so called "named arguments", which are similar to flags.
-  </p>
-  <p>
-    You may find all the documentation about Ganyu on this page.
-  </p>
-- <img src="https://github.com/iwakura-enterprises/ganyu/blob/main/ganyu-logo.png?raw=true" alt="Ganyu logo" width="300" style="inline" border-effect="rounded"/>
+<img src="https://akasha.iwakura.enterprises/data-source/hetzner/public/logo/ganyu.png" alt="Ganyu logo" width="300" border-effect="rounded"/>
 
-{columns="2"}
+Ganyu is a Java library that allows you to create easy CLI. It provides a toolset of annotations and classes to create
+commands and subcommands. Contrary to normal CLI libraries, Ganyu also provides so called "named arguments", which
+are similar to flags. All command definitions are done via annotations, making it super easy.
 
-<procedure title="Quick example" id="quick_example" collapsible="true" default-state="expanded">
+[Source Code](https://github.com/iwakura-enterprises/ganyu) —
+[Documentation](https://docs.iwakura.enterprises/ganyu/) —
+[Maven Central](https://central.sonatype.com/artifact/enterprises.iwakura/ganyu)
+
+## Quick example
+
+<procedure>
 
 ```java
 // Define a command
