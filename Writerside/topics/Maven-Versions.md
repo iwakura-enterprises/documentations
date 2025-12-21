@@ -84,4 +84,24 @@ Portal. These badges are then used in other articles. They are all clickable... 
         <td><a href="https://github.com/iwakura-enterprises/jda-interactables">GitHub</a></td>
         <td><a id="jda_interactables_version" href="https://central.sonatype.com/artifact/enterprises.iwakura/jda-interactables"><img src="https://maven-badges.sml.io/sonatype-central/enterprises.iwakura/jda-interactables/badge.png?style=for-the-badge" alt=""></img></a></td>
     </tr>
+    <tr>
+        <td>Jean Core</td>
+        <td><a href="https://github.com/iwakura-enterprises/jean">GitHub</a></td>
+        <td><a id="jean_core_version" href="https://central.sonatype.com/artifact/enterprises.iwakura/jean-core"><img src="https://maven-badges.sml.io/sonatype-central/enterprises.iwakura/jean-core/badge.png?style=for-the-badge" alt=""></img></a></td>
+    </tr>
+    <tr>
+        <td>Jean GSON</td>
+        <td><a href="https://github.com/iwakura-enterprises/jean">GitHub</a></td>
+        <td><a id="jean_gson_version" href="https://central.sonatype.com/artifact/enterprises.iwakura/jean-gson"><img src="https://maven-badges.sml.io/sonatype-central/enterprises.iwakura/jean-gson/badge.png?style=for-the-badge" alt=""></img></a></td>
+    </tr>
+    <tr>
+        <td>Jean SnakeYAML</td>
+        <td><a href="https://github.com/iwakura-enterprises/jean">GitHub</a></td>
+        <td><a id="jean_snakeyaml_version" href="https://central.sonatype.com/artifact/enterprises.iwakura/jean-snakeyaml"><img src="https://maven-badges.sml.io/sonatype-central/enterprises.iwakura/jean-snakeyaml/badge.png?style=for-the-badge" alt=""></img></a></td>
+    </tr>
+    <tr>
+        <td>Jean JToml</td>
+        <td><a href="https://github.com/iwakura-enterprises/jean">GitHub</a></td>
+        <td><a id="jean_jtoml_version" href="https://central.sonatype.com/artifact/enterprises.iwakura/jean-jtoml"><img src="https://maven-badges.sml.io/sonatype-central/enterprises.iwakura/jean-jtoml/badge.png?style=for-the-badge" alt=""></img></a></td>
+    </tr>
 </table>
