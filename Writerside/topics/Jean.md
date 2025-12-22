@@ -143,13 +143,18 @@ You might need to click the version badge to see the latest version.
 
 ## Creating a Jean instance
 
-There is just one way to create a Jean instance. 
+There are two ways to create a Jean instance. 
+
+`new Jean(Path, Serializer, LoadOptions)`
+: Constructs a new Jean instance with the specified configuration directory, serializer and default load options.
 
 `new Jean(Path, Serializer)`
-: Constructs a new Jean instance with the specified configuration directory and serializer.
+: Constructs a new Jean instance with the specified configuration directory and serializer. Uses `LoadOptions#DEFAULT`
+for load options.
 
 The `Path` parameter specifies the directory where configuration files will be stored. The `Serializer` parameter
-defines the serialization format to be used for reading and writing configuration files.
+defines the serialization format to be used for reading and writing configuration files. The default load options
+are used when loading configurations w/o specifying custom options.
 
 ## Serializers
 
@@ -223,7 +228,7 @@ the next time they are requested.
 You may configure how Jean loads configurations using the `LoadOptions` class.
 
 `saveOnLoad`
-: Whether to save the configuration back to the file after loading.
+: Whether to save the configuration back to the file after loading. Default is `false`.
 
 ## Internal caching
 
