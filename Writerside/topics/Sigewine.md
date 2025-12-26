@@ -1,6 +1,10 @@
 # Sigewine
 
-> Sigewine is a Java library for simple and lightweight dependency injection.
+<img src="https://akasha.iwakura.enterprises/data-source/hetzner/public/logo/sigewine.png" alt="Sigewine logo" width="300" border-effect="rounded"/>
+
+Sigewine is a lightweight runtime dependency injection framework for Java applications. It allows
+you to define and manage your application components (beans) and their dependencies in a simple and efficient way.
+This allows you to create quite-complex applications with minimal boilerplate code and maximum flexibility.
 
 [Source Code](https://github.com/iwakura-enterprises/sigewine) —
 [Documentation](https://docs.iwakura.enterprises/sigewine.html) —
