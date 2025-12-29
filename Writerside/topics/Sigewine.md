@@ -103,7 +103,7 @@ constructors.
 
 <warning title="Limitations">
 <ul>
-    <li>Cyclic dependencies are not supported.</li>
+    <li>Cyclic dependencies are not supported (an exception will be thrown if circular dependency is detected while scanning).</li>
     <li>No lazy loading.</li>
     <li>All beans are singleton, for now.</li>
 </ul>
