@@ -98,7 +98,7 @@ constructors.
 - Automatic bean injection
 - Automatic bean scanning
 - Custom bean names
-- Typed array list for bean injection
+- Injection of List of beans
 - Extensions (Constellations) for additional functionality
 
 <warning title="Limitations">
@@ -268,8 +268,7 @@ public class ServiceConsumer {
 
 <procedure title="Collection of beans" id="collection-of-beans" collapsible="true">
 
-If you have multiple beans that extend a common base class or implement a common interface, you can inject
-them as a collection.
+As of 2.4.0, Sigewine supports injection of collections of beans via constructors.
 
 ```java
 // Define a base entity interface
@@ -295,7 +294,7 @@ public class NpcEntity implements BaseEntity {
 public class GameWorld {
 
     // Injects all beans that extend BaseEntity
-    private final List<BaseEntity> entities = new TypedArrayList<>(BaseEntity.class);
+    private final List<BaseEntity> entities;
 }
 ```
 
