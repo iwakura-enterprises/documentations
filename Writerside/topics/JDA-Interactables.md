@@ -403,8 +403,26 @@ the actual modal in order for the submission to be processed. This will set a ra
 // Example of handling a slash command event
 SlashCommandInteractionEvent slashEvent = /* ... */;
 
-// Create interactable modal with a callback
-InteractableModal interactableModal = new InteractableModal(event -> {
+// Create a modal builder
+Modal.Builder modalBuilder = Modal.create("random-id", "Job Application")
+    .addComponents(
+        TextDisplay.of("# Welcome!\nPlease, fill out the form below."),
+        Label.of(
+            "Name",
+            TextInput.of("name", TextInputStyle.SHORT)
+        ),
+        Label.of(
+            "Why are you interested in this position?",
+            TextInput.of("reason", TextInputStyle.PARAGRAPH)
+        ),
+        Label.of(
+            "What's 1+1?",
+            TextInput.of("math", TextInputStyle.SHORT)
+        )
+    );
+
+// Create interactable modal with the modal builder and a callback
+InteractableModal interactableModal = new InteractableModal(modalBuilder, event -> {
   String name = event.getValue("name").getAsString();
   String reason = event.getValue("reason").getAsString();
   String math = event.getValue("math").getAsString();
@@ -415,27 +433,6 @@ InteractableModal interactableModal = new InteractableModal(event -> {
     + "Math: " + math).queue();
   return Result.REMOVE;
 });
-
-// Create a modal builder
-Modal.Builder modalBuilder = Modal.create("random-id", "Job Application")
-  .addComponents(
-    TextDisplay.of("# Welcome!\nPlease, fill out the form below."),
-    Label.of(
-      "Name",
-      TextInput.of("name", TextInputStyle.SHORT)
-    ),
-    Label.of(
-      "Why are you interested in this position?",
-      TextInput.of("reason", TextInputStyle.PARAGRAPH)
-    ),
-    Label.of(
-      "What's 1+1?",
-      TextInput.of("math", TextInputStyle.SHORT)
-    )
-  );
-
-// Link the interactable modal with the actual modal
-interactableModal.useModal(modalBuilder);
 
 // Reply to the slash command event
 slashEvent.replyModal(modalBuilder.build())
