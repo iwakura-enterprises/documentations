@@ -99,7 +99,7 @@ constructors.
 - Automatic bean scanning
 - Custom bean names
 - Injection of List of beans
-- Extensions (Constellations) for additional functionality
+- Extensions (Extensions) for additional functionality
 
 <warning title="Limitations">
 <ul>
@@ -331,20 +331,19 @@ public class SomeService {
 I recommend using Lombok's `@RequiredArgsConstructor` to avoid boilerplate code.
 Keep in mind that you won't be able to specify per-parameter bean names with it.
 
-### Extensions -- Constellations
+### Extensions
 
-Sigewine supports extensions that allows you to process beans when they are registered. They are named <b>
-Constellations</b>.
+Sigewine supports extensions that allows you to process beans when they are registered.
 
 One of the existing implementation is **AOP extension**, that allows you to wrap methods of beans with additional
 functionality. Please, check the [AOP subpage](AOP.md) for more information.
 
-<procedure title="Defining constellation" id="defining-constellation" collapsible="true">
+<procedure title="Defining extension" id="defining-extension" collapsible="true">
 
 ```java
-public class CustomConstellation extends SigewineConstellation {
+public class CustomExtension extends SigewineExtension {
 
-    public CustomConstellation() {
+    public CustomExtension() {
         super(10); // Priority. Smaller values are processed first.
     }
 
@@ -363,13 +362,13 @@ public class CustomConstellation extends SigewineConstellation {
     }
 }
 
-// Registering the constellation
+// Registering the extension
 public static void main(String[] args) {
     // Create instance of Sigewine
     Sigewine sigewine = new Sigewine(new SigewineOptions());
 
-    // Add custom constellation
-    sigewine.addConstellation(new CustomConstellation());
+    // Add custom extension
+    sigewine.addExtension(new CustomExtension());
 
     // Scan for beans in current package
     sigewine.treatment("your.package.name");
