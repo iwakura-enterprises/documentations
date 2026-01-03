@@ -104,4 +104,9 @@ Portal. These badges are then used in other articles. They are all clickable... 
         <td><a href="https://github.com/iwakura-enterprises/jean">GitHub</a></td>
         <td><a id="jean_jtoml_version" href="https://central.sonatype.com/artifact/enterprises.iwakura/jean-jtoml"><img src="https://maven-badges.sml.io/sonatype-central/enterprises.iwakura/jean-jtoml/badge.png?style=for-the-badge" alt=""></img></a></td>
     </tr>
+    <tr>
+        <td>Akasha API Kirara</td>
+        <td><a href="https://github.com/iwakura-enterprises/akasha">GitHub</a></td>
+        <td><a id="akasha_api_kirara_version" href="https://central.sonatype.com/artifact/enterprises.iwakura/akasha-api-kirara"><img src="https://maven-badges.sml.io/sonatype-central/enterprises.iwakura/akasha-api-kirara/badge.png?style=for-the-badge" alt=""></img></a></td>
+    </tr>
 </table>

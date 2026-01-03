@@ -1,3 +1,5 @@
+<show-structure depth="2"/>
+
 # Sigewine
 
 <img src="https://akasha.iwakura.enterprises/data-source/hetzner/public/logo/sigewine.png" alt="Sigewine logo" width="300" border-effect="rounded"/>

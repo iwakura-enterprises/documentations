@@ -39,6 +39,9 @@
             <toc-element topic="Pumpk1n.md"/>
         </toc-element>
     </toc-element>
+    <toc-element topic="Services.md">
+        <toc-element topic="Akasha.md"/>
+    </toc-element>
     <toc-element toc-title="Frameworks">
         <toc-element topic="Modular-Discord-Bot.md"/>
     </toc-element>
