@@ -228,6 +228,10 @@ ignored. A non-null return value from this function will be used as the exit cod
 application will
 <b>not</b> exit. This function will not be invoked if no dependencies were downloaded.
 
+<note>
+As of version 1.0.8, these exit options should not be needed. See <a href="#alternative-6-amberclassloader-usage">Alternative: 6. AmberClassLoader usage</a> for more information.
+</note>
+
 `progressHintCallback`
 : An optional callback that will receive progress hints during the bootstrap process.
 This includes updates for existing and currently downloading dependencies. Be aware that this callback may be invoked
@@ -288,9 +292,35 @@ After the dependency is downloaded and validated, it is moved to the final libra
 If `exitCodeAfterDownload` is not null, the program exits with the specified exit code after all dependencies
 are processed. Otherwise, the program continues running.
 
-> It is recommended to exit the program after bootstrapping, as the newly added dependencies may not be
-> available for use in the current runtime. For small number of dependencies this may not be the issue
-> as the JVM may load them correctly.
+> ~~It is recommended to exit the program after bootstrapping, as the newly added dependencies may not be~~
+> ~~available for use in the current runtime. For small number of dependencies this may not be the issue~~
+> ~~as the JVM may load them correctly.~~
+
+<note>
+As of version 1.0.8, amber-core contains <code>AmberClassLoader</code> class that is capable of loading newly added dependencies.
+</note>
+
+#### Alternative: 6. AmberClassLoader usage
+
+If you do not wish to exit the program after bootstrapping, you may use `AmberClassLoader` to load the newly added
+dependencies, including the application's jar. Amber provides a static method `Amber.createClassLoader(List<Path>)`
+that handles the creation of the classloader for you.
+
+```java
+var dependencies = amber.bootstrap();
+var classLoader = Amber.createClassLoader(dependencies);
+
+// Let there be my.application.Main class with
+// a static main() method to start the application
+var mainClass = classLoader.loadClass("my.application.Main");
+mainClass.getMethod("main").invoke(null);
+```
+
+This allows you to continue running your application without restarting. As any subsequent application startups
+will not download any dependencies, the application's jar should load the dependencies as expected.
+
+> The `Amber#createClassLoader(List)` method uses the current thread's context classloader as the parent classloader.
+> It also sets the newly created classloader as the current thread's context classloader.
 
 ### Amber manifest and `MANIFEST.MF`
 
