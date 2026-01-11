@@ -77,7 +77,7 @@ Portal. These badges are then used in other articles. They are all clickable... 
     <tr>
         <td>Amber Core</td>
         <td><a href="https://github.com/iwakura-enterprises/amber">GitHub</a></td>
-        <td><a id="amber_core_version" href="https://central.sonatype.com/artifact/enterprises.iwakura/amber"><img src="https://maven-badges.sml.io/sonatype-central/enterprises.iwakura/amber-core/badge.png?style=for-the-badge" alt=""></img></a></td>
+        <td><a id="amber_core_version" href="https://central.sonatype.com/artifact/enterprises.iwakura/amber-core"><img src="https://maven-badges.sml.io/sonatype-central/enterprises.iwakura/amber-core/badge.png?style=for-the-badge" alt=""></img></a></td>
     </tr>
     <tr>
         <td>JDA Interactables</td>
