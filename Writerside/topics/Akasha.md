@@ -169,7 +169,7 @@ Status code 400 is used when the request is malformed, or you try to access a pa
 
 Uploads a file to the specified path in the given data source.
 
-Requires a multipart/form-data body with an attachment named `file`.
+Accepts application/octet-stream with the file content in the request body.
 
 The response will indicate success or failure of the upload operation.
 
@@ -212,6 +212,138 @@ Status code 400 is used when the request is malformed, or you try to access a pa
 ```
 
 </tab>
+</tabs>
+
+#### `DELETE /data-source/{name}/{file-path}`
+
+Deletes file or directory at the specified path in the given data source. Directories must be
+empty before deletion.
+
+The response will indicate success or failure of the delete operation.
+
+> If the path requires authentication tokens, include them as query parameters like so:
+`?token=your-token-here`
+
+<tabs>
+
+<tab title="200 OK (application/json)">
+
+```json
+{
+  "status": 200,
+  "message": "File deleted successfully"
+}
+```
+
+</tab>
+
+<tab title="200 OK (text/html)">
+
+```
+HTTP Status 200
+
+File deleted successfully
+
+Akasha
+```
+
+</tab>
+<tab title="400 Bad Request (application/json)">
+
+Status code 400 is used when the request is malformed, or you try to access a path that is not allowed.
+
+```json
+{
+  "status": 400,
+  "message": "Bad request"
+}
+```
+
+</tab>
+</tabs>
+
+#### `POST /data-source/{name}/{file-path}`
+
+Allows you to manage the specified file in the given data source. The request body includes `ActionParametersDTO`
+determining the action to perform. This action type then determines the response content.
+
+| Action Type            | Response Content             | Description                                                                |
+|------------------------|------------------------------|----------------------------------------------------------------------------|
+| `FILE_INFO`            | `FileInfoActionResponseDTO`  | Retrieves metadata about the specified file.                               |
+| `LIST_FILES`           | `ListFilesActionResponseDTO` | Lists files in the specified directory.                                    |
+| `LIST_FILES_RECURSIVE` | `ListFilesActionResponseDTO` | Recursively lists files in the specified directory and its subdirectories. |
+
+The response will indicate success or failure of the manage operation.
+
+> If the path requires authentication tokens, include them as query parameters like so:
+`?token=your-token-here`
+
+<tabs>
+
+<tab title="FILE_INFO 200 OK (file exists)">
+
+```json
+{
+  "status": 200,
+  "message": null,
+  "fileInfo": {
+    "name": "example.txt",
+    "path": "/some/directory/example.txt",
+    "sizeBytes": 12345,
+    "type": "FILE"
+  }
+}
+```
+
+</tab>
+
+<tab title="FILE_INFO 200 OK (file does not exist)">
+
+```json
+{
+  "status": 200,
+  "message": null,
+  "fileInfo": null
+}
+```
+
+</tab>
+
+</tabs>
+
+<tabs>
+
+<tab title="LIST_FILES + LIST_FILES_RECURSIVE 200 OK">
+
+```json
+{
+  "status": 200,
+  "message": null,
+  "files": [
+    {
+      "name": "example.txt",
+      "path": "/some/directory/example.txt",
+      "sizeBytes": 12345,
+      "type": "FILE"
+    },
+    {
+      "name": "another-example.txt",
+      "path": "/some/directory/another-example.txt",
+      "sizeBytes": 6789,
+      "type": "FILE"
+    },
+    {
+      "name": "subdirectory",
+      "path": "/some/directory/subdirectory",
+      "sizeBytes": 0,
+      "type": "DIRECTORY"
+    }
+  ]
+}
+```
+
+</tab>
+
 </tabs>
 
 ## Configuration
@@ -317,12 +449,17 @@ Configure Javalin server options.
 
 ```json
 {
-  "port": 7000
+  "port": 7000,
+  "maxRequestSizeBytes": 104857600
 }
 ```
 
 `port`
 : Specifies the port on which the HTTP server listens for incoming requests.
+
+`maxRequestSizeBytes`
+: Sets the maximum allowed size for incoming HTTP requests in bytes. Requests exceeding this size will be rejected with a
+`413 Payload Too Large` status code.
 
 ### `prometheus.json`
 
