@@ -45,6 +45,9 @@
     <toc-element toc-title="Frameworks">
         <toc-element topic="Modular-Discord-Bot.md"/>
     </toc-element>
+    <toc-element toc-title="Hytale Mods">
+        <toc-element topic="wordle.md"/>
+    </toc-element>
     <toc-element toc-title="Minecraft Mods">
         <toc-element topic="Colored-End-Crystals.md"/>
     </toc-element>
