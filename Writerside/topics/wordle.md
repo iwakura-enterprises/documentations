@@ -13,6 +13,11 @@ Play the daily word quiz with your friends on Hytale!
 - `/wordle-admin reload` -> Reloads configuration
 - `/wordle-admin set <word>` -> Sets current solution to specified word
 
+### `/wordle-admin set <word>`
+
+You may specify any 5-letter word as the solution. It does not have to be in the word list. In order to choose
+random word form the word list, specify `random` as the word.
+
 ## Permissions
 
 - `iwakuraenterprises.wordle.command.wordle` - /wordle
@@ -59,7 +64,7 @@ Configuration can be found in the `mods/IwakuraEnterprises_Wordle` directory.
 
 | Name                                   | Description                                                                                                                                                                                                                                                                   |
 |----------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `solutionProvider`                     | Defines what solution provider to use. Currently `NYT` and `LOCAL`                                                                                                                                                                                                            |
+| `solutionProvider`                     | Defines what solution provider to use. Currently `NYT` and `LOCAL`. `LOCAL` creates solutions from the specified `wordList`.                                                                                                                                                  |
 | `localSolution`                        | Used when `solutionProvider` is set to `LOCAL`                                                                                                                                                                                                                                |
 | `wordList`                             | Name of the word list to use. Defaults to `internal`. Word lists are loaded from `mods/IwakuraEnterprises_Wordle/wordlists`                                                                                                                                                   |
 | `timezone`                             | Timezone to use when getting current solution. Solutions are not chosen on random but deterministically based on the date. Timezones are in format like Europe/Prague or GMT+01:00 (see <a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">Wikipedia</a>) |                                                                                                            |
@@ -95,6 +100,10 @@ in `game.json`:
   // ...
 }
 ```
+
+<warning>
+In order to create solutions out of the specified word list, set <code>solutionProvider</code> to <code>LOCAL</code>.
+</warning>
 
 ### Player data
 
