@@ -46,6 +46,7 @@
         <toc-element topic="Modular-Discord-Bot.md"/>
     </toc-element>
     <toc-element toc-title="Hytale Mods">
+        <toc-element topic="hytale-docs.md"/>
         <toc-element topic="wordle.md"/>
     </toc-element>
     <toc-element toc-title="Minecraft Mods">
