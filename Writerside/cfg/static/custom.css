@@ -5,6 +5,10 @@
     src: url(lain.ttf);
 }
 
+:root {
+    --wh-list-li-margin-top: 0 !important;
+}
+
 .title__content {
     font-family: "JetBrains Mono";
 }
@@ -43,4 +47,16 @@ figure {
 .article__img:not(a > .article__img) {
     display: block;
     margin: 0 auto;
+}
+
+.list li {
+    margin-top: 8px !important;
+}
+
+.article .h3-related:not(:empty) {
+    margin-top: 8px !important;
+}
+
+.article .h2-related:not(.sub-title) {
+    margin-top: 16px !important;
 }

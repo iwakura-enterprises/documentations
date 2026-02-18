@@ -1,92 +1,36 @@
-# Docs for Hytale
+# Voile for Hytale
 
-Create stunning documentations right in the game!
+<img src="https://akasha.iwakura.enterprises/data-source/hetzner/public/logo/voile.png" alt="Voile logo" width="300" border-effect="rounded"/>
+
+Create stunning documentations right in the game! **With developer-friendly support.**
 
 [Source Code](https://github.com/iwakura-enterprises/hytale-docs) —
 [Documentation](https://docs.iwakura.enterprises/hytale-docs.html) —
 [Download](https://curseforge.com/hytale/mods/docs)
 
-<warning>
-  This documentation is in progress!
-</warning>
+**Voile** allows you to create **stunning** documentations right in the game. **Accessible via a s simple interface**,
+players will be able to learn everything you need to tell them; from simple topics to complex procedures.
 
-![Docs Banner saying Docs for Hytale, Create stunning documentations in-game!](https://akasha.iwakura.enterprises/data-source/hetzner/public/logo/docs-banner.png)
+**Voile** does not only focus on developers, but **server owners** as well. Using features such as command shortcuts,
+you're able to create accessible interfaces for your server.
 
-***
+![Voile Welcome screenshot](voile-welcome-screenshot.png)
 
-## tl;dr
-
-*   Create **markdown documentation** accessible in the game
-*   Access simply with **/docs** command
-  *   Create shortcuts, e.g. **/rules** to see rules
-*   Targeted to **Server owners** and **Developers** (DocsAPI)!
-
-***
-
-## Screenshots
-
-![Topic with markdown](https://akasha.iwakura.enterprises/data-source/hetzner/public/docs-topic-with-code.png)
-
-![Complex markdown](https://akasha.iwakura.enterprises/data-source/hetzner/public/docs-complex-markdown.png)
-
-![Developers](https://akasha.iwakura.enterprises/data-source/hetzner/public/docs-developers.png)
-
-![Color formatting](https://akasha.iwakura.enterprises/data-source/hetzner/public/docs-color-formatting.png)
-
-***
+With that being said, let's **install** and learn how to use the mod.
 
 ## Installing
 
-After installing the mod inside the mods folder, you can use the command **/docs** to open the documentation interface. Follow the **First steps** guide to see how to create your first documentation.
+Installing is simple; you just need one single .jar without any dependencies.
 
-## Documentation
+- For installing in **singleplayer**, please see [](Installing-singleplayer.md) topic
+- For installing on **server**, please see [](Installing-server.md) topic
 
-You may find complete documentation at [Iwakura Enterprises Docs](https://docs.iwakura.enterprises/hytale-docs.html)
+## Voile for Developers
 
-## Support & suggestions
+Are you developing a mod that requires documentation, small or big? Voile is the perfect solution.
+See [](hytale-docs-developers.md) topic.
 
-You may create issues right here on CurseForge or contact me via e-mail: `mayuna@iwakura.enterprises`
+## Voile for Server Owners
 
-If your question will provide valuable information to other users, I'll share it in FAQ section!
-
-### Commands
-
-*   `/docs` -> Opens the documentation interface
-*   `/docs-reload` -> Reloads config & documentations
-*   `..any other command` -> Opens specific topic! (see **command shortcuts** for more info)
-
-### Permissions
-
-*   `iwakuraenterprises.docs.command.docs` - /docs and all its command shortcuts
-*   `iwakuraenterprises.docs.command.docs-reload` - /docs-reload
-
-## Command shortcuts
-
-Docs allows you to create **command shortcuts**. These commands allows you to open specific topics/documentations with a simple command.
-
-For example, as a server owner, you may create command shortcut `/rules` that will open screen with rules. This can be done in **config.json** located in **mods/IwakuraEneterprises\_Docs** in the **commandShortcuts** section:
-
-```
-"commandShortcuts": {
-  "enabled": true,
-  "commands": [
-    {
-      "name": "rules",
-      "topicIdentifier": "server_rules"
-    }
-  ]
-}
-```
-
-## Future plans
-
-*   Improvements to the UI and UX, incl. error messages
-*   Add images (from asset pack and online)
-*   Create and edit documentations in-game
-*   Search through documentations using full-text search
-*   Per-documentation themes (each mod can have its own theme)
-*   …many more things!
-
-***
-
-![Cirno](https://akasha.iwakura.enterprises/data-source/hetzner/public/docs-cirno.png)
+Are you a server owner planning to create documentation for your server? Look no further!
+See [](hytale-docs-server-owners.md) topic.

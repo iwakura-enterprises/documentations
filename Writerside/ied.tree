@@ -46,7 +46,19 @@
         <toc-element topic="Modular-Discord-Bot.md"/>
     </toc-element>
     <toc-element toc-title="Hytale Mods">
-        <toc-element topic="hytale-docs.md"/>
+        <toc-element topic="hytale-docs.md">
+            <toc-element topic="Installing-server.md" wip="true"/>
+            <toc-element topic="Installing-singleplayer.md" wip="true"/>
+            <toc-element topic="hytale-docs-developers.md">
+                <toc-element topic="hytale-docs-developers-advanced.md"/>
+            </toc-element>
+            <toc-element topic="hytale-docs-server-owners.md">
+                <toc-element topic="hytale-docs-configuration.md"/>
+                <toc-element topic="hytale-docs-command-shortcuts.md"/>
+            </toc-element>
+            <toc-element topic="hytale-docs-formatting.md"/>
+            <toc-element topic="hytale-docs-topic-identifiers.md"/>
+        </toc-element>
         <toc-element topic="wordle.md"/>
     </toc-element>
     <toc-element toc-title="Minecraft Mods">
