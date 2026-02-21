@@ -14,6 +14,7 @@ Using the configuration file, `config.json`, you're able to configure various pa
   (e.g. you may hide this Internal documentation type on production servers). Available types: `SERVER`, `MOD`, `INTERNAL`
 - `validator` - validator configuration (see below)
 - `commandShortcuts` - command shortcuts configuration (see below)
+- `runtimeImageAssets` - runtime image assets configuration (see below)
 
 ### Validator
 
@@ -39,13 +40,26 @@ Command shortcuts allow you to create quick-and-easy commands to open various do
   - `name` - name of the command shortcut. This is what the player types in chat (e.g. `rules` -> `/rules`)
   - `topicIdentifier` - the identifier for topic to be opened by the command shortcut. For more information about topic identifiers, see below.
 
+### Runtime Image Assets
+
+Runtime image assets are images that are loaded from file system or online.
+
+- `enabled` - enables/disables loading runtime image assets. Resource images will still be shown. Runtime imags
+  will be replaced by "Images are disabled" images.
+- `maxImageDownloadFileSizeKb` - specifies the maximum file size of an online image in kilobytes.
+- `inMemoryTimeToLiveSeconds` - specifies the maximum TTL in seconds for a runtime image asset to be loaded in memory.
+  Defaults to one hour. Lower values can make the interface feel unresponsive and laggy!
+- `downloadedImagesTimeToLiveSeconds` - specifies the maximum TTL in seconds for downloaded online image on the file system.
+  Defaults to one day. Lower values can make the interface feel unresponsive and laggy!
+
+For more information about images, see the **Formatting** topic.
+
 ## Example configuration file
 
 ```json
 {
   "enabled": true,
-  "outOfBoxExperience": false,
-  "updateCheckerEnabled": true,
+  "outOfBoxExperience": true,
   "loadDocumentationsFromDirectory": "documentation",
   "defaultTopicIdentifier": "IwakuraEnterprises:MyDocumentation:welcome",
   "enabledTypes": [
@@ -73,6 +87,12 @@ Command shortcuts allow you to create quick-and-easy commands to open various do
         "topicIdentifier": "IwakuraEnterprises:MyDocumentation:test"
       }
     ]
+  },
+  "runtimeImageAssets": {
+    "enabled": true,
+    "maxImageDownloadFileSizeKb": 2048,
+    "inMemoryTimeToLiveSeconds": 3600,
+    "downloadedImagesTimeToLiveSeconds": 86400
   }
 }
 ```
