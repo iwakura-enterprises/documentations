@@ -2,13 +2,13 @@
 
 <img src="https://akasha.iwakura.enterprises/data-source/hetzner/public/logo/voile.png" alt="Voile logo" width="300" border-effect="rounded"/>
 
-Create stunning documentations right in the game! **With developer-friendly support.**
+Create stunning wiki right in the game! **With developer-friendly support.**
 
 [Source Code](https://github.com/iwakura-enterprises/hytale-docs) —
 [Documentation](https://docs.iwakura.enterprises/hytale-docs.html) —
 [Download](https://curseforge.com/hytale/mods/docs)
 
-**Voile** allows you to create **stunning** documentations right in the game. **Accessible via a s simple interface**,
+**Voile** allows you to create **stunning** wiki right in the game. **Accessible via a s simple interface**,
 players will be able to learn everything you need to tell them; from simple topics to complex procedures.
 
 **Voile** does not only focus on developers, but **server owners** as well. Using features such as command shortcuts,

@@ -24,4 +24,8 @@
         <description>Created after removal of "AmiAmi API" from Iwakura Enterprises Docs</description>
         <accepts>AmiAmi-API.html</accepts>
     </rule>
+    <rule id="6ee67b02">
+        <description>Created after removal of "User Interface" from Iwakura Enterprises Docs</description>
+        <accepts>User-Interface.html</accepts>
+    </rule>
 </rules>
