@@ -32,7 +32,7 @@ To disable the Hytale Modding Wiki, see [](hytale-docs-configuration.md).
 You may search through topics with the search bar. The search functionality searches only in the chose interface mode
 and does not support full-text search (yet).
 
-Topics that match the search query are highlighted with <#9fdfed>blue color</#9fdfed>. If topic's child topic match the
+Topics that match the search query are highlighted with blue color. If topic's child topic match the
 search query, their parent topic is also included in the search results.
 
 > Full-text searching functionality is planned for future releases of Voile.
