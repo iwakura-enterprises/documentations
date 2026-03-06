@@ -14,7 +14,7 @@ players will be able to learn everything you need to tell them; from simple topi
 **Voile** does not only focus on developers, but **server owners** as well. Using features such as command shortcuts,
 you're able to create accessible interfaces for your server.
 
-![Voile Welcome screenshot](voile-welcome-screenshot.png)
+![Voile Welcome screenshot](hytale-docs-welcome-screen-1-6-2.png)
 
 With that being said, let's **install** and learn how to use the mod.
 
