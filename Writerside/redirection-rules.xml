@@ -28,4 +28,8 @@
         <description>Created after removal of "User Interface" from Iwakura Enterprises Docs</description>
         <accepts>User-Interface.html</accepts>
     </rule>
+    <rule id="236a9c6a">
+        <description>Created after removal of "Permissions" from Iwakura Enterprises Docs</description>
+        <accepts>hytale-docs-permissions.html</accepts>
+    </rule>
 </rules>
