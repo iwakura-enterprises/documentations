@@ -32,4 +32,56 @@
         <description>Created after removal of "Permissions" from Iwakura Enterprises Docs</description>
         <accepts>hytale-docs-permissions.html</accepts>
     </rule>
+    <rule id="39a7b708">
+        <description>Created after removal of "Installing (server)" from Iwakura Enterprises Docs</description>
+        <accepts>Installing-server.html</accepts>
+    </rule>
+    <rule id="390617f9">
+        <description>Created after removal of "Installing (singleplayer)" from Iwakura Enterprises Docs</description>
+        <accepts>Installing-singleplayer.html</accepts>
+    </rule>
+    <rule id="41946556">
+        <description>Created after removal of "Voile's User Interface" from Iwakura Enterprises Docs</description>
+        <accepts>hytale-docs-user-interface.html</accepts>
+    </rule>
+    <rule id="89dba5b">
+        <description>Created after removal of "Voile for Developers" from Iwakura Enterprises Docs</description>
+        <accepts>hytale-docs-developers.html</accepts>
+    </rule>
+    <rule id="38e9ae">
+        <description>Created after removal of "Advanced" from Iwakura Enterprises Docs</description>
+        <accepts>hytale-docs-developers-advanced.html</accepts>
+    </rule>
+    <rule id="140edb94">
+        <description>Created after removal of "Voile for Server Owners" from Iwakura Enterprises Docs</description>
+        <accepts>hytale-docs-server-owners.html</accepts>
+    </rule>
+    <rule id="7437ba20">
+        <description>Created after removal of "Configuration" from Iwakura Enterprises Docs</description>
+        <accepts>hytale-docs-configuration.html</accepts>
+    </rule>
+    <rule id="12774898">
+        <description>Created after removal of "Command Shortcuts" from Iwakura Enterprises Docs</description>
+        <accepts>hytale-docs-command-shortcuts.html</accepts>
+    </rule>
+    <rule id="4ce658a8">
+        <description>Created after removal of "Permissions" from Iwakura Enterprises Docs</description>
+        <accepts>hytale-docs-permissions.html</accepts>
+    </rule>
+    <rule id="360db7e8">
+        <description>Created after removal of "Formatting" from Iwakura Enterprises Docs</description>
+        <accepts>hytale-docs-formatting.html</accepts>
+    </rule>
+    <rule id="23fef8e7">
+        <description>Created after removal of "Topic front-matter" from Iwakura Enterprises Docs</description>
+        <accepts>hytale-docs-topic-front-matter.html</accepts>
+    </rule>
+    <rule id="5ac889ec">
+        <description>Created after removal of "Topic Identifiers" from Iwakura Enterprises Docs</description>
+        <accepts>hytale-docs-topic-identifiers.html</accepts>
+    </rule>
+    <rule id="1e252ea">
+        <description>Created after removal of "Voile for Hytale" from Iwakura Enterprises Docs</description>
+        <accepts>hytale-docs.html</accepts>
+    </rule>
 </rules>
