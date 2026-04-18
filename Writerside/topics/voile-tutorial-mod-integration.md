@@ -70,6 +70,13 @@ author: Myself
 That contains various information.
 ```
 
+> Best practice: If the topic and/or entire documentation is directed towards only administrators and not players (e.g.
+> contains how to configure the mod), it's best to define required permissions (e.g. `Creative`, this will make sure
+> players that are not in the creative won't see the topic).
+>
+> See the [](voile-documentation-index-file.md) and [](voile-topic-file.md) topics for more information.
+
+
 ## Step 3 - Creating a sub-topic
 
 1. Inside the `{YourModGroup}_MyDocumentation` folder, create a new Markdown file named `features.md`

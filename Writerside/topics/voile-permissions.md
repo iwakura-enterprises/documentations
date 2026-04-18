@@ -16,3 +16,14 @@ Command shortcuts add extra aliases for the `/voile` command. However, when `ove
 configuration, each command shortcut will have its own permission.
 
 For example, the command shortcut `/rules` will have permission `iwakuraenterprises.voile.command.rules`
+
+
+# Documentation and Topic permissions
+
+You may define required permissions for documentations and topics. In order for the player to seem them,
+they will have to have all the specified permissions.
+
+If the player doesn't have the required permissions for a topic that has sub-topics, all sub-topics won't be accessible
+as well.
+
+See [](voile-documentation-index-file.md) and [](voile-topic-file.md) for more information.

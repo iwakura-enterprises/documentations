@@ -171,6 +171,11 @@ After restarting the server, you should be able to run `/rules` command to open 
 ## Further reading
 
 To learn more, please see the following topics.
+
+> You may create administrator-only documentations that will be only visible to certain players with specific permissions.
+> For more information, check the **Documentation index file** and **Topic file** topics.
+
+
 - [](voile-documentation-index-file.md)
 - [](voile-topic-file.md)
 - [](voile-topic-identifiers.md)
